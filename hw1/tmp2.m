@@ -4,7 +4,8 @@ Gr=14;
 ht=51.5;
 hr=1.5;
 d = 1000:1000:20000;
-PG_two_ray = Gt * Gr * ht^2 * hr^2 *(1./d).^4;
+pt = 10.^((33 - 30) / 10); %pt: transmit power
+PG_two_ray = pt *Gt * Gr * ht^2 * hr^2 *(1./d).^4;
 PL_dB_two_ray = -10 * log10(PG_two_ray);
 figure;
 plot(d, PL_dB_two_ray);
