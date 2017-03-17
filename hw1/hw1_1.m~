@@ -20,4 +20,7 @@ for c = 1:scale
     %pr: receive power, the received power of the mobile device (in dB) as the y-axis 
     pr(1,c) = 20*log(pl(1,c) * pt * gt * gr);
 end
+% si(signal power)/(interference power+noise power)
+
+
 plot(d, pr);

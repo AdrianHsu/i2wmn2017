@@ -1,0 +1,18 @@
+fc=900*10^6;
+c_light=3*10^8;
+lamda=c_light/fc;
+Gt=1;
+Gr=1;
+L=1;
+ht=30;
+hr=1;
+d_tx_rx_km=1:20;
+d_tx_rx_m= d_tx_rx_km*10^3;
+PL_exp_2=2;
+PG_two_ray=Gt*Gr*ht^2*hr^2*(1./d_tx_rx_m).^4;
+PL_dB_two_ray=-10*log10(PG_two_ray);
+figure;
+plot(d_tx_rx_km, PL_dB_two_ray);
+xlabel('Distance between transmitter and receiver'); ylabel('Path Loss (dB)');
+title('Modelling of two-ray ground reflection model');
+h = legend('two-ray Model',1);
