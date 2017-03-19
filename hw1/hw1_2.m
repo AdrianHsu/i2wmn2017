@@ -14,12 +14,10 @@ gr = 10.^(gr_db / 10); %gr: receive antenna gain
 ht = h_bs; %ht: transmit antenna height
 hr = h_md; %hr: receive antenna height
 d = 1:1:scale; %d: reference distance, the distance between the BS and the mobile device (in meter) as the x-axis.
-%pl = zeros(1,scale);
-%pr = zeros(1,scale);
 pl = (ht*hr)^2 * (1./d).^4; %pl: path loss
 pl_db = 10*log10(pl);
 
-s_norm = normrnd(0,std_db,1,scale); % R = normrnd(mu,sigma,m,n) m-by-n matrix
+s_norm = normrnd(0,std_db,1,scale); % normrnd(mu,sigma,m,n)
 %pr: receive power, the received power of the mobile device (in dB) as the y-axis 
 pr_db = (p_bs_dbm - 30) + gt_db + gr_db + pl_db + s_norm;
 
@@ -32,11 +30,11 @@ h = legend('two-ray Model',1);
 %2-2
 % sinr: (signal power)/(interference power+noise power), SINR = S/(I+N)
 k = 1.38 * 10^(-23); % Boltzmans constant
-n = k * (T + 273) * bw; % Thermal noise power
-% sinr = zeros(1, scale);
+n = k * (T + 273.13) * bw; % Thermal noise power
 pr = 10.^(pr_db / 10);
 inter = 0;
 sinr = 10*log10( pr / (inter + n) );
+
 figure;
 plot(d, sinr);
 xlabel('the distance (in meter) between the BS and the mobile device'); ylabel('SINR of the mobile device (in dB)');

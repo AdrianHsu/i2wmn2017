@@ -32,7 +32,6 @@ h = legend('two-ray Model',1);
 k = 1.38 * 10^(-23); % Boltzmans constant
 n = k * (T + 273.15) * bw; % Thermal noise power
 inter = 0;
-% sinr = zeros(1, scale);
 sinr = 10*log10( pr / (inter + n) );
 figure;
 plot(d, sinr);
