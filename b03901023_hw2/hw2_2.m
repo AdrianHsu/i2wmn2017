@@ -20,6 +20,7 @@ bs_num = 19;
 % 2-1
 [c_x,c_y] = hexagon(0,0,ms_num);
 hold on;
+plot(0,0,'*');
 plot(c_x, c_y, '.');
 xlabel('Distance(m)'), ylabel('Distance(m)');
 title('fig. 2-1');

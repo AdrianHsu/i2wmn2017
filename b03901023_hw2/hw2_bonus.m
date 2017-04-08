@@ -25,6 +25,7 @@ c_y = zeros(bs_num,ms_num);
 
 hold on;
 for i = 1:bs_num
+    plot(bs_x(i), bs_y(i), '*');
     [c_x(i,:), c_y(i,:)] = hexagon(bs_x(i), bs_y(i), ms_num);
 end
 plot(c_x, c_y, '.');
