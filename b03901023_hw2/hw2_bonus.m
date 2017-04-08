@@ -66,8 +66,8 @@ for i = 1:bs_num
 
     gc = twoRayGnd(h_bs, h_md, d_t);
     gc_db = todB(gc);
-    power_dB(:,:,i) = p_ms_db + gt_db + gr_db + gc_db;
-    power = fromdB(power_dB(:,:,i));
+    power_dB = p_ms_db + gt_db + gr_db + gc_db;
+    power = fromdB(power_dB);
 
     tmp = sum(power);
     total = sum(tmp);
@@ -80,6 +80,6 @@ for i = 1:bs_num
 end
 
 xlabel('Distance(m)'), ylabel( 'SINR(dB)');
-title('Figure 3-3');
+title('fig. 3-3');
 legend('BS1', 'BS2', 'BS3', 'BS4', 'BS5', 'BS6', 'BS7', 'BS8', 'BS9', 'BS10', 'BS11', 'BS12', 'BS13', 'BS14', 'BS15', 'BS16', 'BS17', 'BS18', 'BS19');
 hold off;
