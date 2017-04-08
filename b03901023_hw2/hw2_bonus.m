@@ -55,7 +55,7 @@ title('fig. 3-2');
 
 % BONUS, B-3
 noise = thermNoise(T + 273.15, bw);
-inter(bs_num:ms_num);
+inter = zeros(bs_num,ms_num);
 
 figure;
 hold on;
