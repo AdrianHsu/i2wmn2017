@@ -19,11 +19,11 @@ bs_num = 19;
 
 % 1-1
 [v_x,v_y,c_x,c_y]=hexagon(0,0,ms_num);
-plot(c_x, c_y, '.');
 hold on;
+plot(c_x, c_y, '.');
 plot(v_x,v_y);
-title('fig. 1-1');
 xlabel('Distance(m)'), ylabel('Distance(m)');
+title('fig. 1-1');
 hold off;
 
 % 1-2
@@ -34,8 +34,8 @@ pr_ms_db = p_bs_db + gt_db + gr_db + gc_db;
 
 figure;
 scatter(d, pr_ms_db);
-title('fig. 1-2');
 xlabel('Distance(m)'), ylabel( 'Received Power(dB)');
+title('fig. 1-2');
 
 % 1-3
 noise = thermNoise(T + 273.15, bw);
@@ -58,5 +58,5 @@ sinr = sinrDB( pr_ms, inter_db_total, noise);
 
 figure;
 scatter(d, sinr);
-title('fig. 1-3');
 xlabel('Distance(m)'), ylabel( 'SINR(dB)');
+title('fig. 1-3');
