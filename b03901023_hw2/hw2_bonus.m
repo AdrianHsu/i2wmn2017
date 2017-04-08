@@ -28,11 +28,58 @@ hold on;
 for i = 1:bs_num
     [c_x(i,:), c_y(i,:)] = hexagon(bs_x(i), bs_y(i), ms_num);
 end
-hold on;
 plot(c_x, c_y, '.');
 xlabel('Distance(m)'), ylabel('Distance(m)');
 title('fig. 1-1');
 Xmax = 4*side;
 Ymax = 2.5*dist;
 axis([-1.1*Xmax, 1.1*Xmax,-1.1*Ymax, 1.1*Ymax])
+hold off;
+
+% BONUS, B-2
+for i = 1:bs_num
+    d_x(i,:) = c_x(i,:) - bs_x(i);
+    d_y(i,:) = c_y(i,:) - bs_y(i);
+end
+d_t = sqrt(d_x.^2 + d_y.^2);
+gc = twoRayGnd(h_bs, h_md, d_t);
+gc_db = todB(gc);
+pr_bs_db = p_ms_db + gt_db + gr_db + gc_db;
+pr_bs = fromdB(pr_bs_db);
+
+figure;
+scatter(d_t(:), pr_bs_db(:),10);    % (:) to become a vector
+xlabel('Distance(m)');
+ylabel('Received Power(dB)');
+title('fig. 3-2');
+
+% BONUS, B-3
+noise = thermNoise(T + 273.15, bw);
+inter(bs_num:ms_num);
+
+figure;
+hold on;
+for i = 1:bs_num
+    d_x = c_x - bs_x(i);
+    d_y = c_y - bs_y(i);
+    d_t = sqrt(d_x.^2 + d_y.^2);
+
+    gc = twoRayGnd(h_bs, h_md, d_t);
+    gc_db = todB(gc);
+    power_dB(:,:,i) = p_ms_db + gt_db + gr_db + gc_db;
+    power = fromdB(power_dB(:,:,i));
+
+    tmp = sum(power);
+    total = sum(tmp);
+
+    d = d_t(i,:);
+    obs = pr_bs(i,:);
+    inter(i,:) = total - obs;
+    sinr = sinrDB(obs,inter(i,:),noise);
+    scatter(d,sinr);
+end
+
+xlabel('Distance(m)'), ylabel( 'SINR(dB)');
+title('Figure 3-3');
+legend('BS1', 'BS2', 'BS3', 'BS4', 'BS5', 'BS6', 'BS7', 'BS8', 'BS9', 'BS10', 'BS11', 'BS12', 'BS13', 'BS14', 'BS15', 'BS16', 'BS17', 'BS18', 'BS19');
 hold off;
