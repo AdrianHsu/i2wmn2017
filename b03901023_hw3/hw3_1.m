@@ -49,7 +49,7 @@ clear x; clear y; clear i; clear num;
 k = 1;
 for i = 1:size(X, 2)
     for j = 1:size(X{i}, 2)
-        MS{k} = MS_randwalk(X{i}(j), Y{i}(j), 0, 0, i);
+        MS{k} = MS_randwalk(X{i}(j), Y{i}(j), 0, 0, 0, i);
         [testX, testY, MS{k}] = MS{k}.update();
         k = k + 1;
     end
