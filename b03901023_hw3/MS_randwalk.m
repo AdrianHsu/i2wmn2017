@@ -55,9 +55,9 @@ classdef MS_randwalk
             G_C = twoRayGnd(obj.H_MS, H_R, d_t);
             P_T = fromdB(obj.P_MS + obj.G_T_dB) * G_C * G_R;
         end
-        function draw(obj)
-            scatter(obj.x, obj.y, 'b');
-        end
+%         function draw(obj)
+%             scatter(obj.x, obj.y, 'b');
+%         end
         function [x,y] = getloc(obj)
             x = obj.x;
             y = obj.y;

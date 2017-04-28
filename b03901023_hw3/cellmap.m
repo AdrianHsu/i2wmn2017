@@ -16,5 +16,6 @@ function [borderX, borderY] = cellmap(side, X, Y, centralX, centralY, label, dra
             [borderX, borderY] = polybool(borderX, borderY, edgeX{i}, edgeY{i}, 'union');
         end
     end
-    clear i;
+    clear i;    
 end
+

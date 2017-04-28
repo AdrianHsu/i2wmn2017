@@ -90,21 +90,26 @@ for k = 1:ms_num
     p(:,k) = MS{k}.power(bs_x, bs_y, h_bs, gr);
 end
 %
-% total = sum(p, 2);
-% I = zeros(19, ms_num);
-% N = thermNoise(T, B);
-% for i = 1:19
-%     I(i,:) = total(i) - p(i,:);
-% end
-% BS_SINR = sinrDB(p, I, N);
-% [M, maxlabel] = max(BS_SINR);
-% for i = 1:ms_num
-%     [handover, oldlabel, MS{i}] = MS{i}.handover(maxlabel(i));
-%     if(handover == 1)
-%         length = size(handover_msg, 1);
-%         handover_msg(length + 1, :) = {strcat(int2str(tf, 's'), oldlabel, maxlabel(i), i)};
-%     end
-% end
-% Table = cell2table(handover_msg, 'VariableNames', {'Time' 'Source_cell_ID' 'Destination ID' 'MS_ID'})
-% writetable(Table, 'data.csv');
-% fprintf('The amount of total handover times is %d\n', size(handover_msg, 1));
+total = sum(p, 2);
+I = zeros(19, ms_num);
+N = thermNoise(T, B);
+for i = 1:19
+    I(i,:) = total(i) - p(i,:);
+end
+BS_SINR = sinrDB(p, I, N);
+[M, maxlabel] = max(BS_SINR);
+% handover_msg = zeros(1);
+for i = 1:ms_num
+    [handover, oldlabel, MS{i}] = MS{i}.handover(maxlabel(i));
+    if(handover == 1)
+        if i == 1
+            length = 0;
+        else
+            length = size(handover_msg, 1);
+        end
+        handover_msg(length + 1, :) = {'3s', oldlabel, maxlabel(i), i};
+    end
+end
+Table = cell2table(handover_msg, 'VariableNames', {'Time' 'Source_cell_ID' 'Destination_ID' 'MS_ID'});
+writetable(Table, 'data.csv');
+fprintf('The amount of total handover times is %d\n', size(handover_msg, 1));
