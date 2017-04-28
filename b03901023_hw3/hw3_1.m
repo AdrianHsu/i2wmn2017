@@ -73,29 +73,30 @@ hold off;
 %
 % % Update location
 %
-% for k = 1:ms_num
-%     [testX, testY, MS(k)] = MS{k}.update();
-%     if ~inpolygon(testX, testY, borderX, borderY)
-%         for i = 1:6
-%             if inpolygon(testX, testY, outX{i}, outY{i})
-%                 cell_label = i;
-%                 break;
-%             end
-%         end
-%         movetoX = testX - offsetX(cell_label);
-%         movetoY = testY - offsetY(cell_label);
-%         MS{k} = MS{k}.locate(movetoX, movetoY);
-%     end
-%     power(:,k) = MS{k}.power(bs_x, bs_y, h_bs, gr);
-% end
+for k = 1:ms_num
+    [testX, testY, MS{k}] = MS{k}.update();
+    if ~inpolygon(testX, testY, borderX, borderY)
+        cell_label = 1;
+        for i = 1:6
+            if inpolygon(testX, testY, outX{i}, outY{i})
+                cell_label = i;
+                break;
+            end
+        end
+        movetoX = testX - offsetX(cell_label);
+        movetoY = testY - offsetY(cell_label);
+        MS{k} = MS{k}.locate(movetoX, movetoY);
+    end
+    p(:,k) = MS{k}.power(bs_x, bs_y, h_bs, gr);
+end
 %
-% total = sum(power, 2);
+% total = sum(p, 2);
 % I = zeros(19, ms_num);
 % N = thermNoise(T, B);
 % for i = 1:19
-%     I(i,:) = total(i) - power(i,:);
+%     I(i,:) = total(i) - p(i,:);
 % end
-% BS_SINR = sinrDB(power, I, N);
+% BS_SINR = sinrDB(p, I, N);
 % [M, maxlabel] = max(BS_SINR);
 % for i = 1:ms_num
 %     [handover, oldlabel, MS{i}] = MS{i}.handover(maxlabel(i));

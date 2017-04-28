@@ -53,7 +53,7 @@ classdef MS_randwalk
             d_y = obj.y - y_b;
             d_t = sqrt(d_x.^2 + d_y.^2);
             G_C = twoRayGnd(obj.H_MS, H_R, d_t);
-            P_T = fromdB(obj.P_MS, obj.G_T_dB) * G_C * G_R;
+            P_T = fromdB(obj.P_MS + obj.G_T_dB) * G_C * G_R;
         end
         function draw(obj)
             scatter(obj.x, obj.y, 'b');
