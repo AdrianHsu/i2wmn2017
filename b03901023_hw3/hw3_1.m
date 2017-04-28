@@ -28,21 +28,21 @@ hold off;
 offsetX = side*[4.5, 7.5, 3, -4.5, -7.5, -3];
 offsetY = dist*[3.5, -0.5, -4, -3.5, 0.5, 4];
 for i = 1:6
-    
+
     [outX{i}, outY{i}] = cellmap(side, bs_x, bs_y, offsetX(i), offsetY(i), 0, 0);
 end
 
 % % 3-2
-% MS_label = randi(size(bs_x, 2), 1, ms_num);
-% for i = 1:size(bs_x, 2)
-%     num = sum(MS_label == i);
-%     if num > 0
-%         [x, y] = hexagon(side, bs_x(i), bs_y(i), num, 0);
-%         X(i) = x;
-%         Y(i) = y;
-%     end
-% end
-% clear x; clear y; clear i; clear num;
+MS_label = randi(size(bs_x, 2), 1, ms_num);
+for i = 1:size(bs_x, 2)
+    num = sum(MS_label == i);
+    if num > 0
+        [x, y] = hexagon(bs_x(i), bs_y(i), num);
+        X{i} = x;
+        Y{i} = y;
+    end
+end
+clear x; clear y; clear i; clear num;
 %
 % % MS_randwalk
 %
