@@ -28,8 +28,7 @@ hold off;
 offsetX = side*[4.5, 7.5, 3, -4.5, -7.5, -3];
 offsetY = dist*[3.5, -0.5, -4, -3.5, 0.5, 4];
 for i = 1:6
-    
-    [outX{i}, outY{i}] = cellmap(side, bs_x, bs_y, offsetX(i), offsetY(i), 0, 0);
+    [outX(i), outY(i)] = cellmap(side, bs_x, bs_y, offsetX(i), offsetY(i), 0, 0);
 end
 
 % % 3-2
