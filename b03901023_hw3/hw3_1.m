@@ -98,7 +98,6 @@ for i = 1:19
 end
 BS_SINR = sinrDB(p, I, N);
 [M, maxlabel] = max(BS_SINR);
-% handover_msg = zeros(1);
 for i = 1:ms_num
     [handover, oldlabel, MS{i}] = MS{i}.handover(maxlabel(i));
     if(handover == 1)
@@ -107,7 +106,7 @@ for i = 1:ms_num
         else
             length = size(handover_msg, 1);
         end
-        handover_msg(length + 1, :) = {'3s', oldlabel, maxlabel(i), i};
+        handover_msg(length + 1, :) = {strcat(int2str(i),'s'), oldlabel, maxlabel(i), i};
     end
 end
 Table = cell2table(handover_msg, 'VariableNames', {'Time' 'Source_cell_ID' 'Destination_ID' 'MS_ID'});
