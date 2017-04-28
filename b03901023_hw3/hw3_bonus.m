@@ -19,9 +19,7 @@ side = dist/sqrt(3);
 bs_x = side * [-3,-3,-3,-1.5,-1.5,-1.5,-1.5,0,0,0,0,0,1.5,1.5,1.5,1.5,3,3,3];
 bs_y = dist * [-1,0,1,-1.5,-0.5,0.5,1.5,-2,-1,0,1,2,-1.5,-0.5,0.5,1.5,-1,0,1];
 figure;
-[borderX, borderY] = mobile_map(side, bs_x, bs_y, 0, 0, 1, 1);
-Xmax = max(borderX);
-Ymax = max(borderY);
+[maxX, maxY, borderX, borderY] = mobile_map(side, bs_x, bs_y, 0, 0, 1, 1);
 title('Figure B-1');
 xlabel('Distance(m)'), ylabel('Distance(m)');
 hold off;
@@ -36,7 +34,7 @@ mobile_label = randi(size(bs_x, 2), 1, ms_num);
 for i = 1:size(bs_x, 2)
     num = sum(mobile_label == i);
     if num > 0
-        [x, y] = hexagon(bs_x(i), bs_y(i), num);
+        [x, y] = hexagon_c(bs_x(i), bs_y(i), num);
         X{i} = x;
         Y{i} = y;
     end

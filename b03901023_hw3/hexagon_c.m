@@ -1,5 +1,5 @@
 %ref: https://www.mathworks.com/matlabcentral/answers/33593-generate-uniformly-distributed-points-inside-a-hexagon
-function [c_x, c_y] = hexagon(x0, y0, ms_num)
+function [c_x, c_y] = hexagon_c(x0, y0, ms_num)
 
     dist = 500;
     N = ms_num; %ms_num = 100, Number of users
@@ -13,14 +13,13 @@ function [c_x, c_y] = hexagon(x0, y0, ms_num)
     %There is a command in MATLAB inploygon.
     %The command finds points within a polygon region. %get the points within the polygon
     IN = inpolygon(c_x + x0, c_y + y0, v_x + x0, v_y + y0);
-
     %drop nodes outside the hexagon
     c_x = c_x(IN); c_y = c_y(IN);
     %choose only N points
     idx = randperm(N);
     c_x = c_x(idx(1:N)) + x0;
     c_y = c_y(idx(1:N)) + y0;
-%     v_x = v_x + x0;
-%     v_y = v_y + y0;
-%     plot(v_x, v_y);
+    % v_x = v_x + x0;
+    % v_y = v_y + y0;
+    % plot(v_x, v_y);
 end
