@@ -1,18 +1,20 @@
-function [borderX, borderY] = cellmap(size, X, Y, centralX, centralY, label, draw)
+function [borderX, borderY] = cellmap(side, X, Y, centralX, centralY, label, draw)
 
-    BS_X = X + centralX;
-    BS_Y = Y + centralY;
+    bs_x = X + centralX;
+    bs_y = Y + centralY;
     hold on;
-    for i = 1:size(BS_X, 2)
-        [edgeX{i}, edgeY{i}] = hexagonborder(side, BS_X(i), BS_Y(i), draw);
+    si = 19;
+    for i = 1:si
+        [edgeX{i}, edgeY{i}] = hexagon_border(side, bs_x(i), bs_y(i), draw);
         if label == 1
-            text(BS_X(i), BS_Y(i), int2str(i));
+            text(bs_x(i), bs_y(i), int2str(i));
         end
         if i == 1
             borderX = edgeX{i};
             borderY = edgeY{i};
-        else
-            [borderX, borderY] = polibool('union', borderX, borderY, edgeX{i}, edgeY{i});
+%         else
+%             [borderX, borderY] = polybool('union', borderX, borderY, edgeX{i}, edgeY{i});
         end
     end
     clear i;
+end
