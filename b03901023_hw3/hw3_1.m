@@ -58,17 +58,17 @@ clear i; clear j; clear k;
 
 
 % % draw
-% figure;
-% hold on;
-% cellmap(side, bs_x, bs_y, 0, 0, 1, 1);
-% for i = 1:ms_num
-%     [MS_X, MS_Y] = MS{i}.getloc();
-%     text(MS_X, MS_Y, int2str(i), 'Color', 'b');
-% end
-% title('Figure B-2');
-% xlabel('Distance(m)'), ylabel('Distance(m)');
-% axis([-1.1*Xmax, 1.1*Xmax, -1.1*Ymax, 1.1*YMax]);
-% hold off;
+figure;
+hold on;
+cellmap(side, bs_x, bs_y, 0, 0, 1, 1);
+for i = 1:ms_num
+    [MS_X, MS_Y] = MS{i}.getloc();
+    text(MS_X, MS_Y, int2str(i), 'Color', 'b');
+end
+title('Figure B-2');
+xlabel('Distance(m)'), ylabel('Distance(m)');
+% axis([-1.1*Xmax, 1.1*Xmax, -1.1*Ymax, 1.1*Ymax]);
+hold off;
 
 %
 % % Update location
