@@ -1,6 +1,5 @@
-%ref: https://www.mathworks.com/matlabcentral/answers/33593-generate-uniformly-distributed-points-inside-a-hexagon
 function [c_x, c_y] = hexagon_c(x0, y0, ms_num)
-
+%ref:https://www.mathworks.com/matlabcentral/answers/33593-generate-uniformly-distributed-points-inside-a-hexagon
     dist = 500;
     N = ms_num; %ms_num = 100, Number of users
     R = dist/sqrt(3); %Radius of Hexagon

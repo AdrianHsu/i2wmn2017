@@ -14,22 +14,23 @@ p_bs_db = p_bs_dbm - 30;
 dist = 500;
 side = dist/sqrt(3);
 
-
-%3-1
+%% B-1. Please give a figure to describe how you arrange cell IDs to Fig. 1.
 bs_x = side * [-3,-3,-3,-1.5,-1.5,-1.5,-1.5,0,0,0,0,0,1.5,1.5,1.5,1.5,3,3,3];
 bs_y = dist * [-1,0,1,-1.5,-0.5,0.5,1.5,-2,-1,0,1,2,-1.5,-0.5,0.5,1.5,-1,0,1];
-figure;
-[maxX, maxY, borderX, borderY] = mobile_map(side, bs_x, bs_y, 0, 0, 1, 1);
-title('Figure B-1');
-xlabel('Distance(m)'), ylabel('Distance(m)');
-hold off;
 baseX = side * [4.5, 7.5, 3, -4.5, -7.5, -3];
 baseY = dist * [3.5, -0.5, -4, -3.5, 0.5, 4];
-for i = 1:6
-    [outX{i}, outY{i}] = mobile_map(side, bs_x, bs_y, baseX(i), baseY(i), 0, 0);
-end
 
-% % 3-2
+figure;
+hold on;
+[maxX, maxY, vX, vY] = mobile_map(bs_x, bs_y, 0, 0, 1, 1);
+for i = 1:6
+    hold on;
+    [res_x{i}, res_y{i}] = mobile_map(bs_x, bs_y, baseX(i), baseY(i), 0, 0);
+end
+hold off;
+
+%% B-2. Please plot a map with all mobile devices in their initial location.
+hold on;
 mobile_label = randi(size(bs_x, 2), 1, ms_num);
 for i = 1:size(bs_x, 2)
     num = sum(mobile_label == i);
@@ -40,9 +41,8 @@ for i = 1:size(bs_x, 2)
     end
 end
 clear x; clear y; clear i; clear num;
-%
-% % rw_mobile
-%
+hold off;
+
 k = 1;
 for i = 1:size(X, 2)
     for j = 1:size(X{i}, 2)
@@ -53,28 +53,23 @@ for i = 1:size(X, 2)
 end
 clear i; clear j; clear k;
 
-
-% % draw
 figure;
 hold on;
-mobile_map(side, bs_x, bs_y, 0, 0, 1, 1);
+mobile_map(bs_x, bs_y, 0, 0, 1, 1);
 for i = 1:ms_num
     [mobile_X, mobile_Y] = mobile{i}.getGeometry();
-    text(mobile_X, mobile_Y, int2str(i), 'Color', 'b');
+    text(mobile_X, mobile_Y, int2str(i));
 end
 title('Figure B-2');
 xlabel('Distance(m)'), ylabel('Distance(m)');
-hold off;
 
-%
-% % Update location
-%
+%% Update location
 for k = 1:ms_num
     [testX, testY, mobile{k}] = mobile{k}.update();
-    if ~inpolygon(testX, testY, borderX, borderY)
+    if ~inpolygon(testX, testY, vX, vY)
         cell_label = 1;
         for i = 1:6
-            if inpolygon(testX, testY, outX{i}, outY{i})
+            if inpolygon(testX, testY, res_x{i}, res_y{i})
                 cell_label = i;
                 break;
             end
