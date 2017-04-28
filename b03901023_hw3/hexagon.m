@@ -2,7 +2,7 @@
 function [c_x, c_y] = hexagon(x0, y0, ms_num)
 
     dist = 500;
-    N = ms_num; %ms_num = 50, Number of users
+    N = ms_num; %ms_num = 100, Number of users
     R = dist/sqrt(3); %Radius of Hexagon
     %Define the vertexes of the hexagon. They for angles 0, 60, 120, 180, 240 and 300 withe origin. %Vertexes
     v_x = R * cos((0:6)*pi/3);

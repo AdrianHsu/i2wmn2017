@@ -1,7 +1,7 @@
-function [borderX, borderY] = cellmap(side, X, Y, centralX, centralY, label, draw)
+function [borderX, borderY] = mobile_map(side, X, Y, baseX, baseY, label, draw)
 
-    bs_x = X + centralX;
-    bs_y = Y + centralY;
+    bs_x = X + baseX;
+    bs_y = Y + baseY;
     hold on;
     si = 19;
     for i = 1:si
@@ -16,6 +16,5 @@ function [borderX, borderY] = cellmap(side, X, Y, centralX, centralY, label, dra
             [borderX, borderY] = polybool(borderX, borderY, edgeX{i}, edgeY{i}, 'union');
         end
     end
-    clear i;    
+    clear i;
 end
-

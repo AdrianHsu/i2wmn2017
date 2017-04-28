@@ -1,4 +1,5 @@
 function [xo,yo,ind] = polybool(x1,y1,x2,y2,flag)
+% ref: https://github.com/dreamable/cra/blob/master/libs/SAGA/polybool.m
 % POLYBOOL Boolean operations on polygons.
 %	[XO,YO] = POLYBOOL(X1,Y1,X2,Y2,FLAG)
 %	calulates results of Boolean operations on
