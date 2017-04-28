@@ -7,7 +7,7 @@ classdef MS_randwalk
         time
         label
     end
-    preperties(Constant = true, Hidden = true)
+    properties(Constant = true, Hidden = true)
         minSpeed = 1;
         maxSpeed = 15;
         minT = 1;
@@ -18,8 +18,8 @@ classdef MS_randwalk
     end
     methods
         function obj = MS_randwalk(x, y, speed, theta, time, label)
-            if margin == 6
-                ojb.x = x;
+            if nargin == 6
+                obj.x = x;
                 obj.y = y;
                 obj.speed = speed;
                 obj.theta = theta;

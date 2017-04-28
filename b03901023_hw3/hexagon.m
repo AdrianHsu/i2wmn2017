@@ -20,7 +20,7 @@ function [c_x, c_y] = hexagon(x0, y0, ms_num)
     idx = randperm(N);
     c_x = c_x(idx(1:N)) + x0;
     c_y = c_y(idx(1:N)) + y0;
-    v_x = v_x + x0;
-    v_y = v_y + y0;
-    plot(v_x, v_y);
+%     v_x = v_x + x0;
+%     v_y = v_y + y0;
+%     plot(v_x, v_y);
 end

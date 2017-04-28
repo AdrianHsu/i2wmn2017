@@ -46,16 +46,17 @@ clear x; clear y; clear i; clear num;
 %
 % % MS_randwalk
 %
-% k = 1;
-% for i = 1:size(X, 2)
-%     for j = 1:size(X{i}, 2)
-%         MS{k} = MS_randwalk(X{i}(j), Y{i}(j), 0, 0, 0, i);
-%         [testX, testY, MS{k}] = MS{k}.update();
-%         k = k + 1;
-%     end
-% end
-% clear i; clear j; clear k;
-%
+k = 1;
+for i = 1:size(X, 2)
+    for j = 1:size(X{i}, 2)
+        MS{k} = MS_randwalk(X{i}(j), Y{i}(j), 0, 0, i);
+        [testX, testY, MS{k}] = MS{k}.update();
+        k = k + 1;
+    end
+end
+clear i; clear j; clear k;
+
+
 % % draw
 % figure;
 % hold on;
@@ -68,6 +69,7 @@ clear x; clear y; clear i; clear num;
 % xlabel('Distance(m)'), ylabel('Distance(m)');
 % axis([-1.1*Xmax, 1.1*Xmax, -1.1*Ymax, 1.1*YMax]);
 % hold off;
+
 %
 % % Update location
 %
