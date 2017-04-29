@@ -1,5 +1,5 @@
 function [mobile, p] = map_extend(mobile, vX, vY, cX, cY)
-    
+
     ms_num = 100;
     dist = 500;
     side = dist/sqrt(3);
@@ -10,15 +10,11 @@ function [mobile, p] = map_extend(mobile, vX, vY, cX, cY)
     h_bs = 51.5;
     gr_db = 14;
     gr = fromdB(gr_db);
-    
+
     for i = 1:ms_num
         [mobile{i}, newX, newY] = mobile{i}.move();
         if ~inpolygon(newX, newY, vX, vY)
-            fprintf('newX:%d\n', newX);
-            fprintf('newY:%d\n', newY);
             num = 1;
-            
-            
             for j = 1:6
                 if inpolygon(newX, newY, cX{j}, cY{j})
                     num = j;

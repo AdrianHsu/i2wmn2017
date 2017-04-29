@@ -3,7 +3,6 @@ function [maxX, maxY, vX, vY] = mobile_map(X, Y, baseX, baseY, is_text, is_draw)
     side = dist/sqrt(3);
     bs_x = X + baseX;
     bs_y = Y + baseY;
-
     %init
     [v_x{1}, v_y{1}] = hexagon_v(side, bs_x(1), bs_y(1), is_draw);
     if is_text == 1

@@ -43,7 +43,7 @@ classdef rw_mobile
                 obj.speed = unifrnd(obj.minSpeed, obj.maxSpeed);
                 obj.direction = unifrnd(1, 2*pi);
                 interval = obj.maxT - obj.minT;
-                obj.time = obj.minT + unidrnd(interval); 
+                obj.time = obj.minT + unidrnd(interval);
             end
             x = obj.x;
             y = obj.y;
@@ -71,9 +71,7 @@ classdef rw_mobile
                 obj.label = upper;
                 len = size(content, 1);
                 content(len + 1, :) = {strcat(int2str(t),'s'), prev, upper};
-                fprintf('yes: %d\n', t);
             else
-                fprintf('not: %d\n', t);
                 prev = obj.label;
             end
         end
