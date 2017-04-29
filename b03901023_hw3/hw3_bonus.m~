@@ -51,7 +51,7 @@ for i = 1:cell_num
     lenX = size(posX{i}, 2);
     for j = 1:lenX
         mobile{idx} = rw_mobile(posX{i}(j), posY{i}(j), 0, 0, 0, i);
-        [mobile{idx}, testX, testY] = mobile{idx}.move();
+        [mobile{idx}, testX, testY,] = mobile{idx}.move();
         idx = idx + 1;
     end
 end
@@ -66,20 +66,22 @@ end
 title('Figure B-2');
 xlabel('Distance(m)'), ylabel('Distance(m)');
 
+%% Update location
+
 % entend the map
 pow = map_extend(mobile, vX, vY, cX, cY, baseX, baseY);
-% calculate sinr
+
+% sinr
 col_sum = sum(pow, 2);
 inter = zeros(cell_num, ms_num);
 noise = thermNoise(T, bw);
 for i = 1:cell_num
     inter(i,:) = col_sum(i) - pow(i,:);
 end
-sinr = sinrDB(pow, inter, noise);
+BS_SINR = sinrDB(pow, inter, noise);
+[~, maxlabel] = max(BS_SINR);
 
-% Based on B-1, please list all the time when
-% the handoff event occurs and the related cell ID
-[~, maxlabel] = max(sinr);
+%
 for i = 1:ms_num
     [handoff, oldlabel, mobile{i}] = mobile{i}.handoff(maxlabel(i));
     if handoff == 1

@@ -52,18 +52,16 @@ classdef rw_mobile
             obj.x = newX;
             obj.y = newY;
         end
-        function dist = getDist(obj, x_b, y_b)
-            distX = obj.x - x_b;
-            distY = obj.y - y_b;
-            dist = sqrt(distX.^2 + distY.^2);
-        end
         function [x,y] = getGeometry(obj)
             x = obj.x;
             y = obj.y;
         end
-        function pow = getPower(obj, dist, hr, gr)
-            gc = twoRayGnd(obj.h_md, hr, dist);
-            pow = fromdB(obj.p_ms_db + obj.gt_db) * gc * gr;
+        function P_T = power(obj, x_b, y_b, hr, gr)
+            d_x = obj.x - x_b;
+            d_y = obj.y - y_b;
+            d_t = sqrt(d_x.^2 + d_y.^2);
+            gc = twoRayGnd(obj.h_md, hr, d_t);
+            P_T = fromdB(obj.p_ms_db + obj.gt_db) * gc * gr;
         end
         function [handoff, oldlabel, obj] = handoff(obj, maxlabel)
             if obj.label == maxlabel
