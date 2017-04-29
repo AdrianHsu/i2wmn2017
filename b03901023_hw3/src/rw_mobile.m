@@ -35,11 +35,9 @@ classdef rw_mobile
                 obj.label = 0;
             end
         end
-        function[obj, dum_x, dum_y] = move(obj)
+        function[obj, x, y] = move(obj)
             obj.x = obj.x + obj.speed * cos(obj.direction);
-            dum_x = obj.x;
             obj.y = obj.y + obj.speed * sin(obj.direction);
-            dum_y = obj.y;
             obj.time = obj.time - 1;
             if obj.time <= 0
                 obj.speed = unifrnd(obj.minSpeed, obj.maxSpeed);
@@ -47,6 +45,8 @@ classdef rw_mobile
                 interval = obj.maxT - obj.minT;
                 obj.time = obj.minT + unidrnd(interval); 
             end
+            x = obj.x;
+            y = obj.y;
         end
         function obj = extend(obj, newX, newY)
             obj.x = newX;
@@ -65,12 +65,16 @@ classdef rw_mobile
             gc = twoRayGnd(obj.h_md, hr, dist);
             pow = fromdB(obj.p_ms_db + obj.gt_db) * gc * gr;
         end
-        function [obj, content] = getHandoff(obj, upper, content)
+        function [obj, content] = getHandoff(obj, t, upper, content)
             if obj.label ~= upper
                 prev = obj.label;
                 obj.label = upper;
                 len = size(content, 1);
-                content(len + 1, :) = {strcat(int2str(len),'s'), prev, upper};
+                content(len + 1, :) = {strcat(int2str(t),'s'), prev, upper};
+                fprintf('yes: %d\n', t);
+            else
+                fprintf('not: %d\n', t);
+                prev = obj.label;
             end
         end
     end

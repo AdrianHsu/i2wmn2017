@@ -1,4 +1,5 @@
-function [p] = map_extend(mobile, vX, vY, cX, cY, baseX, baseY)
+function [mobile, p] = map_extend(mobile, vX, vY, cX, cY, baseX, baseY)
+    
     ms_num = 100;
     dist = 500;
     side = dist/sqrt(3);
@@ -11,14 +12,15 @@ function [p] = map_extend(mobile, vX, vY, cX, cY, baseX, baseY)
     for i = 1:ms_num
         [mobile{i}, newX, newY] = mobile{i}.move();
         if ~inpolygon(newX, newY, vX, vY)
-            cell_label = 1;
+            num = 1;
             for j = 1:6
                 if inpolygon(newX, newY, cX{j}, cY{j})
-                    cell_label = j;
-                    break;
+                    num = j;
+                    break
                 end
             end
-            mobile{i} = mobile{i}.extend(newX - baseX(cell_label), newY - baseY(cell_label));
+            fprintf('num:%d\n', num);
+            mobile{i} = mobile{i}.extend(newX - baseX(num), newY - baseY(num));
         end
         dist = mobile{i}.getDist(bs_x, bs_y);
         p(:,i) = mobile{i}.getPower(dist, h_bs, gr);

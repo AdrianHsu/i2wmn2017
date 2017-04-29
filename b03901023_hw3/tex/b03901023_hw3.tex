@@ -2,14 +2,40 @@
 
 \usepackage{fontspec}   %加這個就可以設定字體
 \usepackage{xeCJK}       %讓中英文字體分開設置
+\usepackage{listings} % write code
 \setCJKmainfont{標楷體} %設定中文為系統上的字型，而英文不去更動，使用原TeX字型
 \XeTeXlinebreaklocale "zh"             %這兩行一定要加，中文才能自動換行
 \XeTeXlinebreakskip = 0pt plus 1pt     %這兩行一定要加，中文才能自動換行
 \title{Introduction to Wireless and Mobile Networking\\ Homework \#3}
 \author{B03901023 電機三 許秉鈞}
 \date{April 30, 2017} %日期
+\lstset { %
+    language=MATLAB,
+    xleftmargin = 0.2cm,
+    framexleftmargin = 1em,
+    basicstyle=\footnotesize,% basic font setting
+}
 
 \begin{document}
 \maketitle
+
+\textbf(BONUS) [100 moving mobile device, uplink] In this problem, only uplink case is considered. 100 mobile devices do uplink communication and moves based on random walk mobility model as described below.
+
+\begin{lstlisting}
+    T0 = 27;
+    T = T0 + 273.15;
+    ms_num = 100;
+    cell_num = 19;
+    sim_time = 900;
+    bw = 10e6;
+    h_bs = 51.5;
+    gr_db = 14;
+    gr = fromdB(gr_db);
+
+    p_bs_dbm = 33;
+    p_bs_db = p_bs_dbm - 30;
+    dist = 500;
+    side = dist/sqrt(3);
+\end{lstlisting}
 
 \end{document}

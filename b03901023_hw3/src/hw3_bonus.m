@@ -1,4 +1,6 @@
 % hw3_bonus.m
+clear;
+clc;
 
 T0 = 27;
 T = T0 + 273.15;
@@ -68,22 +70,30 @@ end
 title('Figure B-2');
 xlabel('Distance(m)'), ylabel('Distance(m)');
 
-% entend the map
-pow = map_extend(mobile, vX, vY, cX, cY, baseX, baseY);
-% calculate sinr
-col_sum = sum(pow, 2);
-inter = zeros(cell_num, ms_num);
-noise = thermNoise(T, bw);
-for i = 1:cell_num
-    inter(i,:) = col_sum(i) - pow(i,:);
-end
-sinr = sinrDB(pow, inter, noise);
+content = cell(1,3);
+t = 1;
 
 %% B-3. Based on B-1, find the handoff event and the related cell ID
-[~, upper] = max(sinr);
-content = cell(1,3);
-for i = 1:ms_num
-    [mobile{i}, content] = mobile{i}.getHandoff(upper(i), content);
+
+while t <= sim_time
+    % entend the map
+    [mobile, pow] = map_extend(mobile, vX, vY, cX, cY, baseX, baseY);
+    % calculate sinr
+    inter = zeros(cell_num, ms_num);
+    noise = thermNoise(T, bw);
+    col_sum = sum(pow, 2);
+
+    for i = 1:cell_num
+        inter(i,:) = col_sum(i) - pow(i,:);
+    end
+    sinr = sinrDB(pow, inter, noise);
+    [~, upper] = max(sinr);
+    for i = 1:ms_num
+        [mobile{i}, content] = mobile{i}.getHandoff(t, upper(i), content);
+    end
+    t = t + 1;
 end
 table = cell2table(content, 'VariableNames', {'Time' 'Source_cell_ID' 'Destination_ID'});
 writetable(table, 'data.csv');
+fprintf('The amount of total handover times is: %d\n', size(content,1));
+

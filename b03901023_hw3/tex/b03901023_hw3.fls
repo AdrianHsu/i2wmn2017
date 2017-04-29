@@ -67,6 +67,16 @@ INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xunicode-extra.def
 INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xunicode-extra.def
 INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
 INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
 INPUT b03901023_hw3.aux
 INPUT b03901023_hw3.aux
 OUTPUT b03901023_hw3.aux
