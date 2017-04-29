@@ -26,6 +26,32 @@
 
 \begin{document}
 \maketitle
+\section{Data Members and Methods}
+Please check the following \emph{classdef} as shown below, the class definition and data members in the file \emph{rw\_mobile.m}.
+\begin{lstlisting}[caption = {rw\_mobile.m}]
+classdef rw_mobile
+    properties
+        x
+        y
+        direction % a. moving direction between [0, 2pi] uniformly.
+        speed % b. velocity between [minSpeed, maxSpeed] uniformly.
+        time % c. moves t seconds, uniformly between [minT, maxT].
+        label
+    end
+    properties(Constant = true)
+        minSpeed = 1;
+        maxSpeed = 15;
+        minT = 1;
+        maxT = 6;
+
+        gt_db = 14;
+        h_md = 1.5;
+        p_ms_db = 23 - 30;
+    end
+    % blablabla
+end
+\end{lstlisting}
+There are several methods in the class. \emph{move(), extend(), getDist(), getGeometry(), getPower(), and getHandoff()}. To describe those functions, first three are for mobile devices distribution setting; the second half are for the B-3 problems, to say, the \emph{handoff} problem.
 
 \section{Please give a figure to describe how you arrange cell IDs to Fig. 1.}
 \begin{figure}[h]
@@ -34,8 +60,6 @@
     \caption{\emph{B-1. Please give a figure to describe how you arrange cell IDs.}}
     \label{fig:mesh1}
 \end{figure}
-
-
 
 Please check the file \emph{mobile\_map.m}. The program will automatically generates the boundaries, which was called by the function \emph{hexagon\_v()} in line 16. To describe it briefly, first, I made those hexagons in the center, for which their \emph{baseX}, \emph{baseY} are all zeros.
 
@@ -66,6 +90,8 @@ function [maxX, maxY, vX, vY] = mobile_map(X, Y, baseX, baseY, is_text, is_draw)
     maxY = max(vY);
 end
 \end{lstlisting}
+
+
 The order of those 19 cells' IDs are as the following: 1st cell in the left-bottom, and then continuously grows from the left to right, bottom to top.
 \pagebreak
 
@@ -81,6 +107,7 @@ The order of those 19 cells' IDs are as the following: 1st cell in the left-bott
 \textbf{Describe how you decide the initial location.}
 
 please check the following code(\emph{hw3\_bonus.m}) below. In line 37 to 50, The for loop runs cell\_num = 19 times, and after that we get the \emph{posX, posY} vectors represented the position of those surrounding points, which was defined in the function \emph{hexagon\_c.m}, the line 3 to 20. We will go through the process by the following function call as listed.
+\pagebreak
 \begin{lstlisting}[caption = {hw3\_bonus.m}]
 %% B-2. Please plot a map with all mobile devices in their initial location.
 hold on;
@@ -119,6 +146,10 @@ function [c_x, c_y] = hexagon_c(x0, y0, ms_num)
     c_y = c_y(idx(1:N)) + y0;
 end
 \end{lstlisting}
+\section{Based on B-1, please list all the time when the handoff event occurs and the related cell ID.}
 
+
+\section{How many handoff events happen during the total simulation time?}
+I had simulated for 3 times, the results are: \textbf{\textit{3789, 3677, 3731}} (\# of events happened during the total simulation time).
 
 \end{document}
