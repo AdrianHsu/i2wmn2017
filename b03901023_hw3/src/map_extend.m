@@ -21,7 +21,6 @@ function [mobile, p] = map_extend(mobile, vX, vY, cX, cY)
                     break
                 end
             end
-            fprintf('num:%d\n', num);
             mobile{i} = mobile{i}.extend(newX - baseX(num), newY - baseY(num));
         end
         dist = mobile{i}.getDist(bs_x, bs_y);

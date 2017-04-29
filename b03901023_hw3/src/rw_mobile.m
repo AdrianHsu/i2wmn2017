@@ -37,7 +37,9 @@ classdef rw_mobile
         end
         function[obj, x, y] = move(obj)
             obj.x = obj.x + obj.speed * cos(obj.direction);
+            x = obj.x;
             obj.y = obj.y + obj.speed * sin(obj.direction);
+            y = obj.y;
             obj.time = obj.time - 1;
             if obj.time <= 0
                 obj.speed = unifrnd(obj.minSpeed, obj.maxSpeed);
@@ -45,8 +47,6 @@ classdef rw_mobile
                 interval = obj.maxT - obj.minT;
                 obj.time = obj.minT + unidrnd(interval);
             end
-            x = obj.x;
-            y = obj.y;
         end
         function obj = extend(obj, newX, newY)
             obj.x = newX;

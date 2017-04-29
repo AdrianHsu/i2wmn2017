@@ -27,7 +27,7 @@
 \begin{document}
 \maketitle
 \section{Data Members and Methods}
-Please check the following \emph{classdef} as shown below, the class definition and data members in the file \emph{rw\_mobile.m}.
+Please check the following \emph{classdef} as shown below, the class definition and data members are defined in the file \emph{rw\_mobile.m}.
 \begin{lstlisting}[caption = {rw\_mobile.m}]
 classdef rw_mobile
     properties
@@ -51,7 +51,7 @@ classdef rw_mobile
     % blablabla
 end
 \end{lstlisting}
-There are several methods in the class. \emph{move(), extend(), getDist(), getGeometry(), getPower(), and getHandoff()}. To describe those functions, first three are for mobile devices distribution setting; the second half are for the B-3 problems, to say, the \emph{handoff} problem.
+There are several methods in the class. \emph{move(), extend(), getDist(), getGeometry(), getPower(), and getHandoff()}. To describe those functions, first three are for mobile devices distribution setting; the second half are for the B-3 problems, say, the \emph{handoff} problem.
 
 \section{Please give a figure to describe how you arrange cell IDs to Fig. 1.}
 \begin{figure}[h]
@@ -108,6 +108,7 @@ The order of those 19 cells' IDs are as the following: 1st cell in the left-bott
 
 please check the following code(\emph{hw3\_bonus.m}) below. In line 37 to 50, The for loop runs cell\_num = 19 times, and after that we get the \emph{posX, posY} vectors represented the position of those surrounding points, which was defined in the function \emph{hexagon\_c.m}, the line 3 to 20. We will go through the process by the following function call as listed.
 \pagebreak
+
 \begin{lstlisting}[caption = {hw3\_bonus.m}]
 %% B-2. Please plot a map with all mobile devices in their initial location.
 hold on;
@@ -148,6 +149,47 @@ end
 \end{lstlisting}
 \section{Based on B-1, please list all the time when the handoff event occurs and the related cell ID.}
 
+\textbf{\textit{Please check the file data.csv in src}}. To sum up, there are 3987 lines in total, in other words, the handoff event occurs about 3987 times in 900 seconds.
+
+My solution are shown below: first of all, I created a while loop in \emph{hw3\_bonus.m}, from line 79 to 96. Inside the while loop I made a function called \emph{map\_extend()} in order to move those points scattered in the cells, and most important of all, to extend the boundaries when the points are out of bound, in other words, to detect whether the moving mobile devices reached the boundary using \textbf{\textit{inpolygon() and polygon()}}, and then send it back to the relative cell. You can check the function in the file \emph{map\_extend.m} and the corresponding method called in \emph{rw\_mobile.m}, line 38.
+
+\begin{lstlisting}[caption = {map\_extend.m}]
+function [mobile, p] = map_extend(mobile, vX, vY, cX, cY)
+
+    for i = 1:ms_num
+        [mobile{i}, newX, newY] = mobile{i}.move();
+        if ~inpolygon(newX, newY, vX, vY)
+            num = 1;
+            for j = 1:6
+                if inpolygon(newX, newY, cX{j}, cY{j})
+                    num = j;
+                    break
+                end
+            end
+            mobile{i} = mobile{i}.extend(newX - baseX(num), newY - baseY(num));
+        end
+        dist = mobile{i}.getDist(bs_x, bs_y);
+        p(:,i) = mobile{i}.getPower(dist, h_bs, gr);
+    end
+    %blablabla
+end
+\end{lstlisting}
+
+\begin{lstlisting}[caption = {rw\_mobile.m}]
+function[obj, x, y] = move(obj)
+    obj.x = obj.x + obj.speed * cos(obj.direction);
+    x = obj.x;
+    obj.y = obj.y + obj.speed * sin(obj.direction);
+    y = obj.y;
+    obj.time = obj.time - 1;
+    if obj.time <= 0
+        obj.speed = unifrnd(obj.minSpeed, obj.maxSpeed);
+        obj.direction = unifrnd(1, 2*pi);
+        interval = obj.maxT - obj.minT;
+        obj.time = obj.minT + unidrnd(interval);
+    end
+end
+\end{lstlisting}
 
 \section{How many handoff events happen during the total simulation time?}
 I had simulated for 3 times, the results are: \textbf{\textit{3789, 3677, 3731}} (\# of events happened during the total simulation time).
