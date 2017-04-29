@@ -27,9 +27,10 @@ baseY = dist * [3.5, -0.5, -4, -3.5, 0.5, 4];
 figure;
 hold on;
 [maxX, maxY, vX, vY] = mobile_map(bs_x, bs_y, 0, 0, 1, 1); %vX, vY are boundaries
+
 for i = 1:6
     hold on;
-    [cX{i}, cY{i}] = mobile_map(bs_x, bs_y, baseX(i), baseY(i), 0, 0);
+    [~, ~, cX{i}, cY{i}] = mobile_map(bs_x, bs_y, baseX(i), baseY(i), 0, 0);
 end
 hold off;
 
@@ -54,7 +55,7 @@ for i = 1:cell_num
     lenX = size(posX{i}, 2);
     for j = 1:lenX
         mobile{idx} = rw_mobile(posX{i}(j), posY{i}(j), 0, 0, 0, i);
-        [mobile{idx}, testX, testY] = mobile{idx}.move();
+        [mobile{idx}, newX, newY] = mobile{idx}.move();
         idx = idx + 1;
     end
 end
@@ -77,7 +78,7 @@ t = 1;
 
 while t <= sim_time
     % entend the map
-    [mobile, pow] = map_extend(mobile, vX, vY, cX, cY, baseX, baseY);
+    [mobile, pow] = map_extend(mobile, vX, vY, cX, cY);
     % calculate sinr
     inter = zeros(cell_num, ms_num);
     noise = thermNoise(T, bw);

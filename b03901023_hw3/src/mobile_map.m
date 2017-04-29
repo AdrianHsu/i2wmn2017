@@ -5,10 +5,12 @@ function [maxX, maxY, vX, vY] = mobile_map(X, Y, baseX, baseY, is_text, is_draw)
     bs_y = Y + baseY;
     
     %init
-    [vX, vY] = hexagon_v(side, bs_x(1), bs_y(1), is_draw);
+    [v_x{1}, v_y{1}] = hexagon_v(side, bs_x(1), bs_y(1), is_draw);
     if is_text == 1
         text(bs_x(1), bs_y(1), int2str(1));
     end
+    vX = v_x{1};
+    vY = v_y{1};
     %put data
     for i = 2:19
         [v_x{i}, v_y{i}] = hexagon_v(side, bs_x(i), bs_y(i), is_draw);
