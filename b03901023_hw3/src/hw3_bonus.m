@@ -42,6 +42,8 @@ for i = 1:cell_num
         posY{i} = y;
     end
 end
+title('Figure B-1');
+xlabel('Distance(m)'), ylabel('Distance(m)');
 hold off;
 
 % obj initialization
