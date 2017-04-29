@@ -96,5 +96,4 @@ while t <= sim_time
 end
 table = cell2table(content, 'VariableNames', {'Time' 'Source_cell_ID' 'Destination_ID'});
 writetable(table, 'data.csv');
-fprintf('The amount of total handover times is: %d\n', size(content,1));
-
+fprintf('How many handoff events happen during the total simulation time? %d\n', size(content,1));

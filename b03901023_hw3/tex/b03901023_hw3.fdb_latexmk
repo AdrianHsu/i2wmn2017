@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1493485139 "b03901023_hw3.tex" "b03901023_hw3.pdf" "b03901023_hw3" 1493485142
+["pdflatex"] 1493485326 "b03901023_hw3.tex" "b03901023_hw3.pdf" "b03901023_hw3" 1493485329
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/bera/fvmb8t.tfm" 1136768653 1380 e01008d554137b90b1cec573368c3a00 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/bera/fvmr8c.tfm" 1136768653 1268 3764023d12371df1f4893e1c3e0d608c ""
@@ -77,14 +77,14 @@
   "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1463093894 31953 b9489e6e586f798610c60aec1f5ec548 ""
   "/usr/local/texlive/2016/texmf-var/web2c/xetex/xelatex.fmt" 1492870139 3520374 473ed07d4fa2c06354b82b1d3951f557 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "b03901023_hw3.aux" 1493485142 1465 a717b082dccf4c69fef1ad002b1807a1 ""
-  "b03901023_hw3.tex" 1493485136 7761 356cbfca2fea34ffc29713d5fa23e949 ""
+  "b03901023_hw3.aux" 1493485328 1379 18765969cc5c62a00ab66375f88ca076 ""
+  "b03901023_hw3.tex" 1493485325 7770 fb1c9bd8e2be44ee4ac61cdb6a30e3c4 ""
   "img/fig1.png" 1493460134 63289 cc2eec38593ad04026e64311cde6bed2 ""
   "img/fig2.png" 1493460130 116345 9b3f0fd4ea7381c9e04d11f009f41d7c ""
   (generated)
   "sample.m"
-  "b03901023_hw3.lol"
+  "b03901023_hw3.aux"
+  "b03901023_hw3.pdf"
   "person.m"
   "b03901023_hw3.log"
-  "b03901023_hw3.pdf"
-  "b03901023_hw3.aux"
+  "b03901023_hw3.lol"
