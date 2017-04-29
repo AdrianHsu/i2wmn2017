@@ -124,6 +124,7 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT img/fig1.png
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT img/fig2.png
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/bera/t1fvm.fd
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/bera/t1fvm.fd

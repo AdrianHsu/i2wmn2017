@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1493458562 "b03901023_hw3.tex" "b03901023_hw3.pdf" "b03901023_hw3" 1493458565
+["pdflatex"] 1493460556 "b03901023_hw3.tex" "b03901023_hw3.pdf" "b03901023_hw3" 1493460559
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/bera/fvmr8c.tfm" 1136768653 1268 3764023d12371df1f4893e1c3e0d608c ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/bera/fvmr8t.tfm" 1136768653 1380 bb8d389860f8cf35648da78ba6d79918 ""
@@ -15,6 +15,7 @@
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/ec-lmr10.tfm" 1254269338 12056 7e13df7fe4cbce21b072ba7c4f4deb6e ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/ec-lmr12.tfm" 1254269338 12092 7b1546e2d096cfd5dcbd4049b0b1ec2e ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/ec-lmr17.tfm" 1254269338 12156 ca1ae6a3c8564e89597f1f993fba1608 ""
+  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm" 1254269338 17148 9556e1b5f936b77a796f68d2d559ba99 ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty" 1463608860 8253 473e0e41f9adadb1977e8631b8f72ea6 ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty" 1463608860 18425 5b3c0c59d76fac78978b5558e83c1f36 ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/unicode-data/CaseFolding.txt" 1449876215 74499 11c335947e5ffa8ac69a3e530b8d2b40 ""
@@ -72,14 +73,14 @@
   "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1463093894 31953 b9489e6e586f798610c60aec1f5ec548 ""
   "/usr/local/texlive/2016/texmf-var/web2c/xetex/xelatex.fmt" 1492870139 3520374 473ed07d4fa2c06354b82b1d3951f557 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "b03901023_hw3.aux" 1493458564 317 a4ddd83d5ac3e8ca3f6052fe5b6003eb ""
-  "b03901023_hw3.tex" 1493458562 3910 dc794a4ce20dd9b3b34565618880d7da ""
-  "img/fig1.png" 1493446114 82367 af571f0f7f868b25cd45c8fbd4992b35 ""
-  "img/fig2.png" 1493446110 124526 646cf91f6555e08f98e47ae49d00558c ""
+  "b03901023_hw3.aux" 1493460559 443 2b123fd79bcb572fb9d48667d2ef2eab ""
+  "b03901023_hw3.tex" 1493460553 4027 72c780061b0aee65698eada389db5e38 ""
+  "img/fig1.png" 1493460134 63289 cc2eec38593ad04026e64311cde6bed2 ""
+  "img/fig2.png" 1493460130 116345 9b3f0fd4ea7381c9e04d11f009f41d7c ""
   (generated)
+  "sample.m"
   "b03901023_hw3.lol"
   "b03901023_hw3.log"
-  "b03901023_hw3.aux"
   "b03901023_hw3.pdf"
+  "b03901023_hw3.aux"
   "person.m"
-  "sample.m"
