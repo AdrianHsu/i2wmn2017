@@ -51,7 +51,7 @@ for i = 1:cell_num
     lenX = size(posX{i}, 2);
     for j = 1:lenX
         mobile{idx} = rw_mobile(posX{i}(j), posY{i}(j), 0, 0, 0, i);
-        [mobile{idx}, testX, testY,] = mobile{idx}.move();
+        [mobile{idx}, testX, testY] = mobile{idx}.move();
         idx = idx + 1;
     end
 end
@@ -66,33 +66,30 @@ end
 title('Figure B-2');
 xlabel('Distance(m)'), ylabel('Distance(m)');
 
-%% Update location
-
 % entend the map
 pow = map_extend(mobile, vX, vY, cX, cY, baseX, baseY);
-
-% sinr
+% calculate sinr
 col_sum = sum(pow, 2);
 inter = zeros(cell_num, ms_num);
 noise = thermNoise(T, bw);
 for i = 1:cell_num
     inter(i,:) = col_sum(i) - pow(i,:);
 end
-BS_SINR = sinrDB(pow, inter, noise);
-[~, maxlabel] = max(BS_SINR);
+sinr = sinrDB(pow, inter, noise);
 
-%
+%% B-3. Based on B-1, find the handoff event and the related cell ID
+[~, maxlabel] = max(sinr);
 for i = 1:ms_num
     [handoff, oldlabel, mobile{i}] = mobile{i}.handoff(maxlabel(i));
     if handoff == 1
         if i == 1
             length = 0;
         else
-            length = size(handoff_msg, 1);
+            length = size(content, 1);
         end
-        handoff_msg(length + 1, :) = {strcat(int2str(i),'s'), oldlabel, maxlabel(i), i};
+        content(length + 1, :) = {strcat(int2str(i),'s'), oldlabel, maxlabel(i)};
     end
 end
-Table = cell2table(handoff_msg, 'VariableNames', {'Time' 'Source_cell_ID' 'Destination_ID', 'MS_ID'});
-writetable(Table, 'data.csv');
-fprintf('The amount of col_sum handoff times is %d\n', size(handoff_msg, 1));
+table = cell2table(str, 'VariableNames', {'Time' 'Source_cell_ID' 'Destination_ID'});
+writetable(table, 'data.csv');
+fprintf('The amount of col_sum handoff times is %d\n', size(, 1));

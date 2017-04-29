@@ -42,7 +42,6 @@ for i = 1:cell_num
         posY{i} = y;
     end
 end
-clear x; clear y; clear mysum;
 hold off;
 
 % obj initialization
@@ -56,6 +55,7 @@ for i = 1:cell_num
     end
 end
 
+% plot mobile devices
 figure;
 hold on;
 mobile_map(bs_x, bs_y, 0, 0, 1, 1);
@@ -77,20 +77,11 @@ for i = 1:cell_num
 end
 sinr = sinrDB(pow, inter, noise);
 
-% Based on B-1, please list all the time when
-% the handoff event occurs and the related cell ID
-[~, maxlabel] = max(sinr);
+%% B-3. Based on B-1, find the handoff event and the related cell ID
+[~, upper] = max(sinr);
+content = cell(1,3);
 for i = 1:ms_num
-    [handoff, oldlabel, mobile{i}] = mobile{i}.handoff(maxlabel(i));
-    if handoff == 1
-        if i == 1
-            length = 0;
-        else
-            length = size(handoff_msg, 1);
-        end
-        handoff_msg(length + 1, :) = {strcat(int2str(i),'s'), oldlabel, maxlabel(i), i};
-    end
+    [mobile{i}, content] = mobile{i}.getHandoff(upper(i), content);
 end
-Table = cell2table(handoff_msg, 'VariableNames', {'Time' 'Source_cell_ID' 'Destination_ID', 'MS_ID'});
-writetable(Table, 'data.csv');
-fprintf('The amount of col_sum handoff times is %d\n', size(handoff_msg, 1));
+table = cell2table(content, 'VariableNames', {'Time' 'Source_cell_ID' 'Destination_ID'});
+writetable(table, 'data.csv');
