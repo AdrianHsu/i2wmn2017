@@ -21,6 +21,7 @@ cell_num = 19;
 bs_x = side*[-3,-3,-3,-1.5,-1.5,-1.5,-1.5,0,0,0,0,0,1.5,1.5,1.5,1.5,3,3,3];
 bs_y = dist*[-1,0,1,-1.5,-0.5,0.5,1.5,-2,-1,0,1,2,-1.5,-0.5,0.5,1.5,-1,0,1];
 
+figure;
 % B-1
 hold on;
 [x,y] = hexagon_c(0, 0, ms_num);
@@ -63,7 +64,7 @@ title('figure B-2');
 figure;
 
 % 4-3
-data_buff = zeros(ms_num, 3);
+buf_ms = zeros(ms_num, 3);
 lambda = [0.2, 0.5, 1]*1e6;
 total = [0,0,0];
 missbit = [0,0,0];
@@ -84,12 +85,12 @@ for p = 1:3
                 end
             else
                 tmp = cap(i) - arrive_rate;
-                if data_buff(i,p) < tmp
-                    remain(p) = remain(p) + data_buff(i,p);
-                    data_buff(i,p) = 0;
+                if buf_ms(i,p) < tmp
+                    remain(p) = remain(p) + buf_ms(i,p);
+                    buf_ms(i,p) = 0;
                 else
                     remain(p) = remain(p) + tmp;
-                    data_buff(i,p) = data_buff(i,p) - tmp;
+                    buf_ms(i,p) = buf_ms(i,p) - tmp;
                 end
             end
         end
