@@ -86,10 +86,9 @@ for p = 1:3
     end
     total(p) = buf;
 end
-
 loss = missbit ./ total;
 
 bar(CBR , loss);
-title('figure 4-3')
-xlabel('traffic load(bits/s)')
-ylabel('bits loss probability')
+xlabel('Traffic Load');
+ylabel('Bits Loss Probability');
+title('figure 4-3');
