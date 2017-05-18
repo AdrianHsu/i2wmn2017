@@ -63,16 +63,16 @@ title('figure B-2');
 figure;
 
 % 4-3
-CBR = [0.2, 0.5, 1]*1e6;
+data_buff = zeros(ms_num, 3);
+lambda = [0.2, 0.5, 1]*1e6;
 total = [0,0,0];
 missbit = [0,0,0];
 remain = [1,1,1] * bw;
-
 for p = 1:3
     buf = 0; % for total buffer
     for i=1:ms_num
         for t=1:sim_time
-            arrive_rate = CBR(p);
+            arrive_rate = lambda(p);
             buf = buf + arrive_rate;
             if cap(i) < arrive_rate
                 tmp = remain(p) - (arrive_rate - cap(i));
@@ -82,14 +82,23 @@ for p = 1:3
                 else
                     remain(p) = tmp;
                 end
+            else
+                tmp = cap(i) - arrive_rate;
+                if data_buff(i,p) < tmp
+                    remain(p) = remain(p) + data_buff(i,p);
+                    data_buff(i,p) = 0;
+                else
+                    remain(p) = remain(p) + tmp;
+                    data_buff(i,p) = data_buff(i,p) - tmp;
+                end
             end
         end
     end
     total(p) = buf;
 end
-loss = missbit ./ total;
+loss = missbit./total;
 
-bar(CBR , loss);
+bar(lambda, loss, 'b');
 xlabel('Traffic Load');
 ylabel('Bits Loss Probability');
-title('figure 4-3');
+title('figure B-3');
