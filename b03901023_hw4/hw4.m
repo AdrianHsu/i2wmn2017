@@ -9,6 +9,7 @@ sim_time = 1000;
 T0 = 27;
 T = T0 + 273.15;
 bw  = 10e6;
+h_ms = 1.5;
 h_bs    = 51.5;
 p_bs_dbm = 33;
 p_bs_db = p_bs_dbm - 30;
@@ -29,42 +30,41 @@ scatter(x, y);
 is_draw = 1;
 [v_x, v_y] = hexagon_v(side, 0, 0, is_draw);
 
-Xmax = max(v_x);
-Ymax = max(v_y);
 title('MS & BS scatter');
 xlabel('Distance(m)'), ylabel('Distance(m)');
 hold off;
 saveas(figB_1,'4_1.jpg');
 
 % %% 4-2 Shannon capacity to distance
-% B = bw / ms_num;
-% Noise = myThermalNoise(T, B);
-%
-% % get distance b/w each MS & BS
-% d = zeros(19,ms_num);
-% for i = 1:19
-%     d_x = x-bs_x(i);
-%     d_y = y-bs_y(i);
-%     d(i,:) =  sqrt(d_x.^2 + d_y.^2);
-% end
-%
-% G_C = G_two_ray_ground(H_T, H_MS, d);
-% G_C_dB = todB(G_C);
-% power = p_bs_db + gt_db + gr_db + G_C_dB;
-% power = fromdB(power);
-% P_R_MS =  power(10,:);
-% I_t = sum(power,1) - power(10,:);
-% SINR = mySINR( P_R_MS, I_t, Noise);
-%
-% capacity = B * log2(1+fromdB(SINR));
-% distance = sqrt(x .^ 2 + y .^ 2);
-%
-% figB_2 = figure();
-% set (figB_2,'Visible','off');
-% scatter(distance, capacity / 1e6, 20, 'o', 'filled');
-% xlabel('Distance(m)'), ylabel( 'Shannon capacity (Mbps)');
-% title('Shannon capacity to distance');
-% saveas(figB_2,'4_2.jpg');
+channel_bw = bw / ms_num;
+noise = thermNoise(T, channel_bw);
+
+% get distance b/w each MS & BS
+d = zeros(19,ms_num);
+for i = 1:19
+    d_x = x - bs_x(i);
+    d_y = y - bs_y(i);
+    d(i,:) = sqrt(d_x.^2 + d_y.^2);
+end
+
+gc = twoRayGnd(h_bs, h_ms, d);
+gc_db = todB(gc);
+power = p_bs_db + gt_db + gr_db + gc_db;
+power = fromdB(power);
+pr_ms =  power(10,:);
+i_t = sum(power,1) - power(10,:);
+sinr = sinrDB( pr_ms, i_t, noise );
+
+capacity = channel_bw * log2( 1 + fromdB(sinr) );
+distance = sqrt(x .^ 2 + y .^ 2);
+
+figB_2 = figure();
+set (figB_2,'Visible','off');
+scatter(distance, capacity / 1e6, 20, 'o', 'filled');
+xlabel('Distance(m)'), ylabel( 'Shannon capacity (Mbps)');
+title('Shannon capacity to distance');
+saveas(figB_2,'4_2.jpg');
+
 % %% 4-3
 % buffersize = 1e6;
 % missrate = zeros(1,3);
