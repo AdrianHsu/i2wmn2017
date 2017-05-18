@@ -66,49 +66,49 @@ title('Shannon capacity to distance');
 saveas(figB_2,'4_2.jpg');
 
 % %% 4-3
-% buffersize = 1e6;
-% missrate = zeros(1,3);
-% CBR = 1e6 * [1,0.5,0.2];
-% for type = 1 : 3
-%     buffer = zeros(1,ms_num);
-%     miss = zeros(1,ms_num);
-%     rate = CBR(type);
-%     for t = 1:sim_time
-%         data = rate + buffer;
-%         oversize = data - capacity;
-%         overflow = oversize > 0;
-%         buffer(~overflow) = 0;
-%         oversize(~overflow) = 0;
-%         temp = 0; % how many bits store in buffer
-%         for i = 1 : ms_num
-%             if overflow(i)
-%                 if temp + oversize(i) <= buffersize
-%                     temp = temp + oversize(i);
-%                     buffer(i) = oversize(i);
-%                 else
-%                     stop = i;
-%                     store = buffersize - temp;
-%                     loss = oversize(i) - store;
-%                     miss(i) = miss(i) + loss ;
-%                     buffer(i) = store;
-%                     break;
-%                 end
-%             end
-%         end
-%         miss(stop+1:ms_num) = miss(stop+1:ms_num) + oversize(stop+1:ms_num);
-%         buffer(stop+1:ms_num) = 0;
-%     end
-%     missrate(type) = sum(miss) / (sim_time * ms_num * rate);
-% end
-% figB_3 = figure();
-% set (figB_3,'Visible','off');
-% bar(missrate);
-% set(gca,'XTickLabel',{'high','medium','low'})
-% for i = 1:3
-%     text(i, missrate(i)+0.05, num2str(missrate(i)));
-% end
-% xlabel('Traffic Load');
-% ylabel('Bits Loss Probability(%)');
-% title('Constant Bits Rate');
-% axis([0.5,3.5,0,1]);
-% saveas(figB_3,'4_3.jpg');
+buffersize = 1e6;
+missrate = zeros(1,3);
+CBR = 1e6 * [1,0.5,0.2];
+for type = 1 : 3
+    buffer = zeros(1,ms_num);
+    miss = zeros(1,ms_num);
+    rate = CBR(type);
+    for t = 1:sim_time
+        data = rate + buffer;
+        oversize = data - capacity;
+        overflow = oversize > 0;
+        buffer(~overflow) = 0;
+        oversize(~overflow) = 0;
+        temp = 0; % how many bits store in buffer
+        for i = 1 : ms_num
+            if overflow(i)
+                if temp + oversize(i) <= buffersize
+                    temp = temp + oversize(i);
+                    buffer(i) = oversize(i);
+                else
+                    stop = i;
+                    store = buffersize - temp;
+                    loss = oversize(i) - store;
+                    miss(i) = miss(i) + loss ;
+                    buffer(i) = store;
+                    break;
+                end
+            end
+        end
+        miss(stop+1:ms_num) = miss(stop+1:ms_num) + oversize(stop+1:ms_num);
+        buffer(stop+1:ms_num) = 0;
+    end
+    missrate(type) = sum(miss) / (sim_time * ms_num * rate);
+end
+figB_3 = figure();
+set (figB_3,'Visible','off');
+bar(missrate);
+set(gca,'XTickLabel',{'high','medium','low'})
+for i = 1:3
+    text(i, missrate(i)+0.05, num2str(missrate(i)));
+end
+xlabel('Traffic Load');
+ylabel('Bits Loss Probability(%)');
+title('Constant Bits Rate');
+axis([0.5,3.5,0,1]);
+saveas(figB_3,'4_3.jpg');
