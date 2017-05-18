@@ -16,6 +16,7 @@ gt_db = 14;
 label = 10;
 dist    = 500;
 side   = dist/sqrt(3);
+cell_num = 19;
 
 bs_x = side*[-3,-3,-3,-1.5,-1.5,-1.5,-1.5,0,0,0,0,0,1.5,1.5,1.5,1.5,3,3,3];
 bs_y = dist*[-1,0,1,-1.5,-0.5,0.5,1.5,-2,-1,0,1,2,-1.5,-0.5,0.5,1.5,-1,0,1];
@@ -37,8 +38,8 @@ hold off;
 channel_bw = bw / ms_num;
 noise = thermNoise(T, channel_bw);
 
-d = zeros(19,ms_num);
-for i = 1:19
+d = zeros(cell_num,ms_num);
+for i = 1:cell_num
     d_x = x - bs_x(i);
     d_y = y - bs_y(i);
     d(i,:) = sqrt(d_x.^2 + d_y.^2);
@@ -48,16 +49,16 @@ gc = twoRayGnd(h_bs, h_ms, d);
 gc_db = todB(gc);
 power = p_bs_db + gt_db + gr_db + gc_db;
 power = fromdB(power);
-pr_ms =  power(10,:);
-i_t = sum(power,1) - power(10,:);
-sinr = sinrDB( pr_ms, i_t, noise );
+pr_ms = power(10,:);
+inter = sum(power,1) - power(10,:);
+sinr = sinrDB(pr_ms, inter, noise);
 
 cap = channel_bw * log2( 1 + fromdB(sinr) );
-distance = sqrt(x .^ 2 + y .^ 2);
-scatter(distance, cap / 1e6, 20, 'o', 'filled');
+distance = sqrt(x.^ 2 + y.^ 2);
+scatter(distance, cap, 'o');
 
 xlabel('Distance(m)');
-ylabel( 'Shannon Capacity(Mbps)');
+ylabel( 'Shannon Capacity(bps)');
 title('figure 4-2');
 figure;
 
