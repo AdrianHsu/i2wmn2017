@@ -1,8 +1,6 @@
 clc;
 clear;
 
-dist    = 500;          % inter site distance
-side   = dist/sqrt(3);
 ms_num = 50;
 sim_time = 1000;
 T0 = 27;
@@ -12,15 +10,17 @@ h_ms = 1.5;
 h_bs    = 51.5;
 p_bs_dbm = 33;
 p_bs_db = p_bs_dbm - 30;
-p_ms   = 0  - 30;      % MS power = 0  dBm
+p_ms   = -30;
 gr_db = 14;
 gt_db = 14;
 label = 10;
+dist    = 500;
+side   = dist/sqrt(3);
 
 bs_x = side*[-3,-3,-3,-1.5,-1.5,-1.5,-1.5,0,0,0,0,0,1.5,1.5,1.5,1.5,3,3,3];
 bs_y = dist*[-1,0,1,-1.5,-0.5,0.5,1.5,-2,-1,0,1,2,-1.5,-0.5,0.5,1.5,-1,0,1];
 
-%% B-1 MS & central BS scatter
+% B-1
 figB_1 = figure();
 set (figB_1,'Visible','off');
 hold on;
@@ -34,11 +34,10 @@ xlabel('Distance(m)'), ylabel('Distance(m)');
 hold off;
 saveas(figB_1,'B_1.jpg');
 
-%% B-2 Shannon capacity to distance
+% B-2
 channel_bw = bw / ms_num;
 noise = thermNoise(T, channel_bw);
 
-% get distance b/w each MS & BS
 d = zeros(19,ms_num);
 for i = 1:19
     d_x = x - bs_x(i);
@@ -63,7 +62,8 @@ scatter(distance, capacity / 1e6, 20, 'o', 'filled');
 xlabel('Distance(m)'), ylabel( 'Shannon capacity (Mbps)');
 title('Shannon capacity to distance');
 saveas(figB_2,'B_2.jpg');
-% %% B-3 Bits Loss Probability to Traffic Load
+
+% B-3
 buffersize = 1e6;
 missrate = zeros(1,3);
 lambda = 1e6 * [1.5,0.5,0.2];
@@ -77,7 +77,7 @@ for type = 1 : 3
         overflow = oversize > 0;
         buffer(~overflow) = 0;
         oversize(~overflow) = 0;
-        temp = 0; % how many bits store in buffer
+        temp = 0;
         for i = 1 : ms_num
             if overflow(i)
                 if temp + oversize(i) <= buffersize
