@@ -52,9 +52,9 @@ pr_ms =  power(10,:);
 i_t = sum(power,1) - power(10,:);
 sinr = sinrDB( pr_ms, i_t, noise );
 
-C = channel_bw * log2( 1 + fromdB(sinr) );
+cap = channel_bw * log2( 1 + fromdB(sinr) );
 distance = sqrt(x .^ 2 + y .^ 2);
-scatter(distance, C / 1e6, 20, 'o', 'filled');
+scatter(distance, cap / 1e6, 20, 'o', 'filled');
 
 xlabel('Distance(m)');
 ylabel( 'Shannon Capacity(Mbps)');
@@ -62,29 +62,34 @@ title('figure 4-2');
 figure;
 
 % 4-3
-CBR = [0.25, 0.5 , 1]*10^6; %constant bit rate, CBR parameters {Xl, Xm, Xh}
-bitloss = zeros(1,3);
-total_bit = zeros(1,3); %total bits
-rem_buff = ones(1,3)*bw; %remain buffer
-for t = 1:sim_time
+CBR = [0.2, 0.5, 1]*1e6;
+total = [0,0,0];
+missbit = [0,0,0];
+remain = [1,1,1] * bw;
+
+for p = 1:3
+    buf = 0; % for total buffer
     for i=1:ms_num
-        for k=1:3 %rate low medium high
-            temp_arrival = CBR(k);
-            total_bit(1,k) = total_bit(1,k) + temp_arrival;
-            if C(1, i) < temp_arrival %rate > capacity , goes to buffer
-                rem_buff(1,k) = rem_buff(1,k) - (temp_arrival-C(1, i));
-                if (rem_buff(1,k) < 0) %buffer is full
-                    bitloss(1,k) = bitloss(1,k) - rem_buff(1,k);
-                    rem_buff(1,k) = 0;
+        for t=1:sim_time
+            arrive_rate = CBR(p);
+            buf = buf + arrive_rate;
+            if cap(i) < arrive_rate
+                tmp = remain(p) - (arrive_rate - cap(i));
+                if (tmp < 0)
+                    missbit(p) = missbit(p) - tmp;
+                    remain(p) = 0;
+                else
+                    remain(p) = tmp;
                 end
             end
         end
     end
+    total(p) = buf;
 end
 
-loss_prob = bitloss ./ total_bit;
+loss = missbit ./ total;
 
-bar(CBR , loss_prob);
+bar(CBR , loss);
 title('figure 4-3')
 xlabel('traffic load(bits/s)')
 ylabel('bits loss probability')
