@@ -1,7 +1,6 @@
 clc;
 clear;
 
-
 dist    = 500;          % inter site distance
 side   = dist/sqrt(3);
 ms_num = 50;
