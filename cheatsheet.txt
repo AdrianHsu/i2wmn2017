@@ -198,3 +198,12 @@ Total coverage area = 262.4 km^2。Total 1000 duplex channels。Cell radius = 1k
 [QoC 服務的品質]
 Channel availability (wireless network is available when users need it) ：Blocking probability或Dropping probability。Coverage: probability of receiving adequate signal level at different locations。Transmission quality: fidelity/quality of received signals。BER 或 FER
 ---------------------
+Power in decibels: Y dB=10 log10 (x Watt)。 Power ratio in decibels: 10 log10 (P1/P2)。Y dBm = 10 log10 (x Watts/10^-3)
+Gain/attenuation in dB = 10 log10 (output power/input power), i.e. "Gain(dB)=Pout(dB)-Pin(dB)"
+SNR= signal power(Watt)/noise power(Watt), SNR(dB)= 10 log10 (signal power(Watt)/noise power(Watt))。
+Bit Energy to Noise Ratio = Eb/N0。
+• Eb=Stb。 Eb: energy per bit (J)。 S: signal power (carrier power) (W) 。tb: duration of a bit (s)
+• N0=N/B。 N: total noise power (W) – B: bandwidth (Hz)。Eb/N0=(S/N)(B/fb)
+Shannon Capacity: Theoretical (upper) bound of communication systems。
+C=B*log2 (1+S/N)。C: capacity (bits/s)。B: bandwidth (Hz)。S/N: linear Signal-to-Noise ratio。
+Nyquist Bandwidth(multilevel signaling):C = 2B log2 M，where M = number of discrete signal or voltage levels
