@@ -112,6 +112,19 @@ Beacon, Authentication, ATIM(Announcement Traffic Indication Message), Probe Req
 The MS sends a "power-save poll (PS-Poll) frame" to the AP and goes active
 2. power-save mode (PS mode)
 Notify AP with “Power Management bit” in Frame Control field; in PS mode, MSs listen for beacons periodically
+[power management]
+• AP operations (when MS is in PS mode)– Does not arbitrarily sends MSDU to MS– Buffer MSDUs(MAC SDU, service data unit) at AP until MS “wake up” – MSs with buffered MSDUs at AP are identified with traffic indication map (TIM).• TIM is included in periodic beacons• MS learns that it has data buffered by checking the beacon/TIM• AP operations when MS goes into active mode– The AP then sends the buffered data to the mobile in active mode
+[802.11 paging/sleep]
+Paging and Sleep mode • Wake up mechanism is called Paging• Combine with location management mechanism (in cellular networks not in 802.11)– Paging area V.S. location area– Frequency of location area update– Savings(Power consumption, Signaling overhead)
+[Listening to Beacon]
+Beacon for synchronization, Quasi-periodic, Might be deferred due to busy medium
+[802.11 TIM/DTIM]
+• TIM (traffic indication map)– Contain the info of PS mode stations with data buffered at AP, TIM interval: transmit TIM (quasi) periodically• TIM might be deferred due to busy medium
+• DTIM (delivery traffic indication map)– Similar to TIM, DTIM is used for multicast/broadcast, DTIM interval = multiple TIM interval
+[802.11 TSF-power management]
+Timing Synchronization Function(TSF)– stations wake up at the same time
+[802.11 Security] WEP(舊、爛)->EAP(Extensible Authentication Protocol), WPA(Wi-Fi Protected Access)
+
 [MAC 表頭訊框]
 Power Management (Pwr Mgt): 此旗標用來顯示行動台之電源管理模式。其值為 1 表示此行動台處於省電模式，其值為 0 表示此行動台處於正常模式。所有由 AP 傳送的訊框上此值都必須為 0。
 More Data: 此旗標由 AP 用來通知處於省電模式之 行動台說 AP 目前仍有MSDUs (MAC Service Data Units)欲傳送給該行動台。在 Data 訊框上其值為 1 表示至少還有一個 MSDU 待轉送。若為其他種類的訊框，則其值應為 0。
@@ -156,6 +169,32 @@ tBackoff = INT(CW*Random())*時槽時間，CWmin=7, CWmax=255。
 [固定式-單通道]
 1. 分頻多重存取 FDMA (Frequency Division Multiple Access) / 2. 分時多重存取 TDMA (Time Division Multiple Access, 在時間軸上 平等的劃分許多等長的訊框 (Frame)，而每個訊框再細分 為許多相等的時槽 (Timeslot)，每個時槽使用一個通道， 每一通道供一位使用者使用 / 3. 分碼多重存取 CDMA (Code Division Multiple Access) 除了切割時間之外，每一組傳輸都會 給予一組特定的編碼 (Code) ，要傳送的位元會先經過編 碼再傳送出去，如果彼此的編碼是正交 (Orthogonal) ，即 使使用相同的頻率也不會互相干擾。正交編碼:假設有四個編碼A、B、C、D ，編碼若彼此正 交，內積會等於0，因此不會互相產生干擾。而內積後獲 得+1表示送出的位元為1，獲得-1則送出的位元為0。
 [隨機式-單通道]
-1. Aloha 2. Slotted-Aloha 將時間軸分為許多時槽，當傳送端要傳送資料時，每次使用一個時槽 3.CSMA載波偵測多重存取機制, Carrier Sense是指傳送者必須先監聽目前傳輸媒介是否有人在使用，而Multiple Access則是指有多個節點共用這個傳輸媒介。在要傳輸之前會先偵測傳輸媒介，觀 察是否有其他節點正在傳輸資料，若無正在傳輸的資料 則直接傳送。
+1. Aloha 2. Slotted-Aloha 將時間軸分為許多時槽，當傳送端要傳送資料時，每次使用一個時槽 3.CSMA載波偵測多重存取機制, Carrier Sense是指傳送者必須先監聽目前傳輸媒介是否有人在使用，而Multiple Access則是指有多個節點共用這個傳輸媒介。在要傳輸之前會先偵測傳輸媒介，觀察是否有其他節點正在傳輸資料，若無正在傳輸的資料 則直接傳送。
+[DAMA, Demand Assigned Multiple Access] 分三種。
+[Reserve-Aloha, explicit 保存] 先Aloha mode（時間短）做contention, 再reserve mode（長）做data transmit。
+[PRMA, implicit 保存] 多個slots形成一個frame（8個）。e.g. ACDABA-F，過了2t變成 AC-ABAF-。
+[Reserve-TDMA] 每個frame裡面有N mini-slots和x data-slots。 x = N * k（ 12 = 6 * 2 )，k為用幾個mini-slots，這裡用了2個。
+[Duplex] 指二台通訊裝置之間，允許有雙向的資料傳輸。
+TDD (time division duplex), FDD (frequency division duplex)
+[Multiplexing] 多路複用通常表示在一個頻道上傳輸多路訊號或數據流的過程和技術。
+TDM (time division multiplexing), FDM (frequency division multiplexing)。
+TDM利用一個半雙工的傳輸來模擬全雙工的傳輸過程。時分雙工在非對稱網路（上傳及下載頻寬不平衡的網路）有明顯的優點，它可以根據上傳及下載的資料量，動態的調整對應的頻寬，如果上傳資料量大時，就會提高上傳的頻寬，若資料量減少時再將頻寬降低。相較來說，若上傳及下載的資料量相近時，頻分雙工比時分雙工更有效率。 在這個情形下，時分雙工會在切換傳送接收時，浪費一些頻寬，因此延遲時間較長，而且其線路較複雜且耗電。
 [DSSS vs. FHSS] DSSS(XOR of the signal with pseudo-random number (chipping sequence))直接序列展頻是將原來窄頻的訊號 , 利用 "展頻碼(Spreading Code)" 將原始訊號展開成數倍頻寬的訊號 , 此展開的方法會將原來訊號的能量降低 , 甚至低於 "背景雜訊質(Background Noise)" , 這樣的機制讓有心擷取資料的人不易判斷出正確的訊號 , 也是軍方在通訊上採用這種技術的原因。跳頻展頻 (FHSS) 則是使用頻寬十分狹窄的 "窄波(Narrowband)" , 利用窄波於不同頻道間跳躍的方式傳遞訊號 , 這種傳遞方式必須建立於訊號交換的二方其窄波跳躍模式(Pattern) 一致 , 否則將無法溝通。(Fast Hopping:several frequencies per user bit/ SlowHopping: several user bits per frequency)
+[MAC Polling]
+• Poll: BS polls MS to transmit bandwidth request • Request: MS tells BS if MS has uplink data to
+send (Request) or not (Keep Alive) • Tx Poll: BS tells MS to transmit uplink data – Response to the previous Request message • Uplink Data: MS transmits data to BS
+[ISMA, Inhibit Sense Multiple Access] the status of the channel: either "busy" or "idle". 由BS送出，送到MS。只要medium 變成 idle, BS就會送出idle給所有MS，MS就會開始搶。
+[SAMA, Spread Aloha Multiple Access] use spread spectrum with only one single code (chipping sequence) for spreading for all senders accessing according to aloha. 例如：spread the signal e.g. using the chipping sequence 110101.
+------------------
+[Cell]
+Frequency reuse factor(FRF) = (Total # of channels in a cluster) / (Total # of channels in a cell)。A cluster of size N can be constructed if, N = i^2 + ij + j^2
+[CCI Co-channel Interference]
+D/r=(3N)^0.5。D :Reuse distance（兩個同樣frequency的cell的中心點相連的距離）。r : Cell radius（六角形邊長）。N : Frequency reuse factor。
+[指向天線]Use directional antenna reduces CCI，3-sector cell。
+[FRF] Cell size should be proportional to 1/(subscriber density), Total system capacity is proportional to (1/N)
+[Example] Compute total system capacity:
+Total coverage area = 262.4 km^2。Total 1000 duplex channels。Cell radius = 1km。N=4 。What’s the total system capacity for N=4 and N=7?。Solution。# of cells = 262.4/2.6=100 cells。# of usable duplex channels/cell。S=(# of channels)/(reuse factor)。S4=1000/4=250。Total system capacity (# of users could be accommodated simultaneously)。C=S*(# of cells)。C4=250*100=25000得解。
 [Cell Breathing] 小區呼吸（Cell breathing）是指如果一個行動電話同時被多個基站覆蓋，基站會根據自身的負載，調整基站的作用範圍的一種技術。當小區超負荷時，會縮小它的服務範圍，以減少用戶量。CDMA常用。
+[QoC 服務的品質]
+Channel availability (wireless network is available when users need it) ：Blocking probability或Dropping probability。Coverage: probability of receiving adequate signal level at different locations。Transmission quality: fidelity/quality of received signals。BER 或 FER
+---------------------
