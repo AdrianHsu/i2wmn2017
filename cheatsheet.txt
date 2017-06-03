@@ -23,13 +23,14 @@ Proactive Routing 主動式路由（所有的路由資訊都必需維護，無�
 [OLSR]
 利用多重傳送點(Multipoint relay, MPR)，以減少Link state在網路中「廣播」的數量。
 MPR的概念是在一個節點的1-hop鄰居之中尋找一些節點，成為一個子集合，在此子集合的節點能完全的覆蓋2-hop的鄰居，此子集合中的點稱為MPR節點。因此，當節點要廣播封包時，只需要他的MPR節點做轉送，其他的鄰居節點收到廣播封包後則不需再轉播，接著這些MPR節點的MPR節點再轉送。OLSR只允許被選為MPR的節點產生鏈結狀態更新封包，只有通往MPR節點的邊被記錄，因此當密度較高時，更新封包的長度能有效減少。
+Link State Routing路由演算法能夠針對網路的變化做出比較快速的回應動作，DV則不行。週期性的floods目前link 狀態出去，收到的則會re-broadcast幫忙傳開，用來對於每個destination決定下個hop。
 ---
 BSS: 由AP負責同一區所有傳輸
 IBSS: I是獨立，每個station之間彼此直接通訊、不需透過AP
 用IBSS交換資訊的雙方可能不在彼此的通訊範圍之內，需要其他station中繼(Relay)封包。封包的傳送需要多點跳躍(Multihop)才能送到目的地，因此如何尋找路由路徑(Routing path)，也就是路由探索(Route discovery)，把封包快速有效的傳往目的地很重要。
 ---
 Route discovery 節點利用廣播(Broadcast) 路由請求(Route request, RREQ) 來獲得路由路徑。
-廣播風暴：在無線隨意網路中，節點可使用氾濫式(Flooding) 傳輸讓網路上所有節點皆能收到廣播訊息，也就是當節點收到新的廣播封包時，便會做一次重播(Rebroadcast) 。因為Node位置改變、每個節點之間訊號範圍可能會有重疊的區域、因此造成Broadcast storm問題。
+DSR的廣播風暴（Route reply storm）：在無線隨意網路中，節點可使用氾濫式(Flooding) 傳輸讓網路上所有節點皆能收到廣播訊息，也就是當節點收到新的廣播封包時，便會做一次重播(Rebroadcast) 。因為Node位置改變、每個節點之間訊號範圍可能會有重疊的區域、因此造成Broadcast storm問題。解決方式是，當節點聽到其他RREP有較短路徑時，這結點就防止送出新的RREP。
 ---
 Route caching
 RERR
@@ -39,7 +40,12 @@ Aloha v.s. SLotted Aloha 效率差一倍 why?
 多通道的優點
 ---
 [比較 AODV vs. DSR]
-AODV：當無線節點要傳送封包出去時，先查找自己的路徑表，若無目的地節點的資訊，則廣播Route Requests(RREQs)封包尋找路徑。每個RREQs都配有一個序列編號ID，當無線節點收到RREQs時，先看ID之前有沒有收過，有的話就丟棄，以免RREQs充斥在網路上，再檢查自己是不是封包裡的目的地位置，不是，則看此中繼點(intermediate node)是否有可用的路徑可以到達目的地節點，沒有，則根據封包內資訊修改路徑表後再廣播出去。每一個收到RREQs的無線節點都會cache住如何返回當時發出Route Reply要求來源端的路徑，因此當中繼點收到RREQ時，可以利用單點廣播方法送出RREP從目的地端到來源端，途中的無線節點根據RREP的位置序號更改路徑表，最後來源端的路徑表就含有到目的地節點的entry，接下來開始資料的傳送。AODV沒有DSR的source routing、以及竊聽機制。AODV有timeouts機制，當舊的路由資訊在計時器過時之後，便會自動刪除以確保路由資訊是足夠新的。
+AODV：當無線節點要傳送封包出去時，先查找自己的路徑表(routing table, 只存放active use的nodes)，若無目的地節點的資訊，則廣播Route Requests(RREQs)封包尋找路徑。每個RREQs都配有一個序列編號ID(destination seq. number)，當無線節點收到RREQs時，先看ID之前有沒有收過，有的話就丟棄，以免RREQs充斥在網路上，再檢查自己是不是封包裡的目的地位置，不是，則看此中繼點(intermediate node)是否有可用的路徑可以到達目的地節點，沒有，則根據封包內資訊修改路徑表後再廣播出去。較新的RREQ的number會較高，比較小的number的intermediate node，不能送route reply。每一個收到RREQs的無線節點都會cache住如何返回當時發出Route Reply要求來源端的路徑，因此當中繼點收到RREQ時，可以利用單點廣播(1-hop)方法送出RREP從destination端到來源端（reverss path），途中的無線節點根據RREP的位置序號更改路徑表，最後來源端的路徑表就含有到目的地節點的entry，接下來開始資料的傳送。AODV沒有DSR的source routing、以及竊聽機制。AODV有timeouts機制，當舊的路由資訊在計時器過時之後，便會自動刪除以確保路由資訊是足夠新的。
 
 DSR：
-利用source routing觀念，即Tx知道Rx完整的跳躍路徑(hop-by-hop route)。每個節點都有路徑暫存器，而路徑資訊直接記錄在每個封包的header中。路徑發現程序(route discovery)與AODV類似，欲傳送封包時，先看自己的路徑表，若找不到到達目的地端的route entry，則作廣播動作發送RREQs，而收到RREQ的節點會回覆RREP給原本的來源端或中繼點，藉此產生路徑。不同的是，路徑記錄每經過一個跳耀，就會將跳躍ID記在RREQ的路徑記錄中，這樣路徑記錄到目的地時就會有該路徑所有節點的資訊，目的端會在多個REQUEST中挑選最佳路徑，根據路徑記錄傳送一個Route Reply回到來源端，來源端再將紀錄再route reply裡的路徑記錄儲存在路由表中。
+利用source routing觀念，即Tx知道Rx完整的跳躍路徑(hop-by-hop route)。每個節點都有路徑暫存器route cache，而路徑資訊直接記錄在每個封包的header中。路徑發現程序(route discovery)與AODV類似，欲傳送封包時，先看自己的路徑表，若找不到到達目的地端的route entry，則作廣播動作發送RREQs，而收到RREQ的節點會回覆RREP給原本的來源端或中繼點，藉此產生路徑。不同的是，路徑記錄每經過一個跳耀，就會將跳躍ID記在RREQ的路徑記錄中，這樣路徑記錄到目的地時就會有該路徑所有節點的資訊，目的端會在多個REQUEST中挑選最佳路徑，根據路徑記錄傳送一個Route Reply回到來源端，來源端再將紀錄再route reply裡的路徑記錄儲存在路由表中。龐大的source route存放在packet header影響效率。DSR會維護多條routes到同一個destination。
+---
+[AODV 的 Link Failure Detection]
+Neighbor node週期性的傳"Hello Messages"，沒收到message可視為link failure。
+[AODV 的 destination seq. number 用途]
+1. 避免走舊的路 2. 避免loop產生
