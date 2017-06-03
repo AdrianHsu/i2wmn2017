@@ -1,17 +1,17 @@
 [Wireless Multihop Relay Networks]
-Mobile Ad Hoc Networks (MANET)
-Wireless Mesh Networks (WMN)
-Wireless Sensor Networks (WSN)
-Vehicular Ad Hoc Networks (VANET)
+Mobile Ad Hoc Networks (MANET): Mobile, ad hoc(peer-to-peer)
+Wireless Mesh Networks (WMN): Infra. multihop relay
+Wireless Sensor Networks (WSN): Sensor, collect/process data, power efficient
+Vehicular Ad Hoc Networks (VANET): vehicle-to-vehicle
 ---
 [Routing Protocol]
-On-demand Routing
-
-Proactive Routing 主動式路由（事先建立，又稱 table-driven）有 2 種：
+On-demand Routing 回應式路由（reactive, 只尋找與維護有需要的路由, AODV, DSR）
+回應式路由較適合網路流量偶然發生、只涉及少數的節點且流量大的情況。缺點則是首次溝通時須耗費較多的時間尋找路徑，因此封包會有較多延遲。
+Proactive Routing 主動式路由（所有的路由資訊都必需維護，無論路徑是否會被使用，又稱 table-driven, OLSR, DSDV）有 2 種：
 1.距離向量 (Distance Vector, DV)法：記錄自己到網路中所有節點的距離及要往該節點路由的下一個節點(向量)。 節點間交換距離向量(DV)資訊，從而計算出自己到各節點的最佳路由。不適用於ad-hoc networks。因為網路連結失敗造成路由迴圈(Routing Loops)產生跳躍數無限 (Count to Infinity)。DSDV可解決之。
 1-1. DV實作細節
 當某節點初次啟動時，將只知道它的鄰居節點(直接連接到該節點的節點) 以及到該節點的成本。這些資訊、目的地列表、每個目的地的總成本，以及到某個目的地所必須經過的下一個節點，構成路由表Routing Table。每個節點定時地將目前所知，到各個目的地的成本的資訊，送給每個鄰居節點。鄰居節點則檢查這些資訊，並跟目前所知的資訊做比較；如果到某個目的地的成本比目前所知的低，則將收到的資訊加入自己的路由表。經過一段時間後，網路上得所有節點將會瞭解到所有目的地的最佳「下一個節點」與最低的總成本。
-2.連結狀態 (Link State)法：記錄自己的連結狀態。節點間 交換連結狀態，從而計算出自己到各節點的最佳路由。
+2.連結狀態 (Link State)法：自己能與哪些節點連接。節點間交換連結狀態，從而計算出自己到各節點的最佳路由。
 ---
 [DSDV]
 以路由表(routing table)為基礎，每一個行動節點必須儲存一張路由表。須紀錄所有與該節點可能進行連結節點的距離。除給自己節點一個序列編號外，路由表內的每筆紀錄也包含一個目的地序列編號(destination sequence number)：用來判斷路徑的新舊，以避免迴路的產生。
@@ -20,9 +20,26 @@ Proactive Routing 主動式路由（事先建立，又稱 table-driven）有 2 �
 
 路由選取： 1. 選取目的地的序號 (destination sequence number) higher的路由 (保證使用來自目的地的最新資訊) 2. 當序號一樣時，選取量度(Metric) [=至目的地的hop counts]lower的路由。
 ---
+[OLSR]
+利用多重傳送點(Multipoint relay, MPR)，以減少Link state在網路中「廣播」的數量。
+MPR的概念是在一個節點的1-hop鄰居之中尋找一些節點，成為一個子集合，在此子集合的節點能完全的覆蓋2-hop的鄰居，此子集合中的點稱為MPR節點。因此，當節點要廣播封包時，只需要他的MPR節點做轉送，其他的鄰居節點收到廣播封包後則不需再轉播，接著這些MPR節點的MPR節點再轉送。OLSR只允許被選為MPR的節點產生鏈結狀態更新封包，只有通往MPR節點的邊被記錄，因此當密度較高時，更新封包的長度能有效減少。
+---
 BSS: 由AP負責同一區所有傳輸
 IBSS: I是獨立，每個station之間彼此直接通訊、不需透過AP
 用IBSS交換資訊的雙方可能不在彼此的通訊範圍之內，需要其他station中繼(Relay)封包。封包的傳送需要多點跳躍(Multihop)才能送到目的地，因此如何尋找路由路徑(Routing path)，也就是路由探索(Route discovery)，把封包快速有效的傳往目的地很重要。
 ---
 Route discovery 節點利用廣播(Broadcast) 路由請求(Route request, RREQ) 來獲得路由路徑。
-廣播的訊息需要一些中繼節點重播(Rebroadcast)，才能使所有節點得知。因為Node位置改變、可能多次重播、造成Broadcast storm問題。
+廣播風暴：在無線隨意網路中，節點可使用氾濫式(Flooding) 傳輸讓網路上所有節點皆能收到廣播訊息，也就是當節點收到新的廣播封包時，便會做一次重播(Rebroadcast) 。因為Node位置改變、每個節點之間訊號範圍可能會有重疊的區域、因此造成Broadcast storm問題。
+---
+Route caching
+RERR
+TDMA, FDMA, CDMA
+Aloha v.s. SLotted Aloha 效率差一倍 why?
+固定v.s.隨機存取
+多通道的優點
+---
+[比較 AODV vs. DSR]
+AODV：當無線節點要傳送封包出去時，先查找自己的路徑表，若無目的地節點的資訊，則廣播Route Requests(RREQs)封包尋找路徑。每個RREQs都配有一個序列編號ID，當無線節點收到RREQs時，先看ID之前有沒有收過，有的話就丟棄，以免RREQs充斥在網路上，再檢查自己是不是封包裡的目的地位置，不是，則看此中繼點(intermediate node)是否有可用的路徑可以到達目的地節點，沒有，則根據封包內資訊修改路徑表後再廣播出去。每一個收到RREQs的無線節點都會cache住如何返回當時發出Route Reply要求來源端的路徑，因此當中繼點收到RREQ時，可以利用單點廣播方法送出RREP從目的地端到來源端，途中的無線節點根據RREP的位置序號更改路徑表，最後來源端的路徑表就含有到目的地節點的entry，接下來開始資料的傳送。AODV沒有DSR的source routing、以及竊聽機制。AODV有timeouts機制，當舊的路由資訊在計時器過時之後，便會自動刪除以確保路由資訊是足夠新的。
+
+DSR：
+利用source routing觀念，即Tx知道Rx完整的跳躍路徑(hop-by-hop route)。每個節點都有路徑暫存器，而路徑資訊直接記錄在每個封包的header中。路徑發現程序(route discovery)與AODV類似，欲傳送封包時，先看自己的路徑表，若找不到到達目的地端的route entry，則作廣播動作發送RREQs，而收到RREQ的節點會回覆RREP給原本的來源端或中繼點，藉此產生路徑。不同的是，路徑記錄每經過一個跳耀，就會將跳躍ID記在RREQ的路徑記錄中，這樣路徑記錄到目的地時就會有該路徑所有節點的資訊，目的端會在多個REQUEST中挑選最佳路徑，根據路徑記錄傳送一個Route Reply回到來源端，來源端再將紀錄再route reply裡的路徑記錄儲存在路由表中。
