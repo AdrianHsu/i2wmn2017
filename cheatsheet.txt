@@ -1,0 +1,28 @@
+[Wireless Multihop Relay Networks]
+Mobile Ad Hoc Networks (MANET)
+Wireless Mesh Networks (WMN)
+Wireless Sensor Networks (WSN)
+Vehicular Ad Hoc Networks (VANET)
+---
+[Routing Protocol]
+On-demand Routing
+
+Proactive Routing 主動式路由（事先建立，又稱 table-driven）有 2 種：
+1.距離向量 (Distance Vector, DV)法：記錄自己到網路中所有節點的距離及要往該節點路由的下一個節點(向量)。 節點間交換距離向量(DV)資訊，從而計算出自己到各節點的最佳路由。不適用於ad-hoc networks。因為網路連結失敗造成路由迴圈(Routing Loops)產生跳躍數無限 (Count to Infinity)。DSDV可解決之。
+1-1. DV實作細節
+當某節點初次啟動時，將只知道它的鄰居節點(直接連接到該節點的節點) 以及到該節點的成本。這些資訊、目的地列表、每個目的地的總成本，以及到某個目的地所必須經過的下一個節點，構成路由表Routing Table。每個節點定時地將目前所知，到各個目的地的成本的資訊，送給每個鄰居節點。鄰居節點則檢查這些資訊，並跟目前所知的資訊做比較；如果到某個目的地的成本比目前所知的低，則將收到的資訊加入自己的路由表。經過一段時間後，網路上得所有節點將會瞭解到所有目的地的最佳「下一個節點」與最低的總成本。
+2.連結狀態 (Link State)法：記錄自己的連結狀態。節點間 交換連結狀態，從而計算出自己到各節點的最佳路由。
+---
+[DSDV]
+以路由表(routing table)為基礎，每一個行動節點必須儲存一張路由表。須紀錄所有與該節點可能進行連結節點的距離。除給自己節點一個序列編號外，路由表內的每筆紀錄也包含一個目的地序列編號(destination sequence number)：用來判斷路徑的新舊，以避免迴路的產生。
+如何Respond to Topology Changes：DSDV在每個節點內再加了一個table，用來記錄其路由表從上次交換至今所更改的部分。如果更改很多[或定期地]，就進行全路由更新 (full routing update)；如果很少，就只針對部分交換，稱為累加式路由更新 (incremental routing update)。
+對拓樸改變反應迅速：每次保留「最先到來的路由」和「最佳路由的到來的時間長度」。當路由表有顯著改變(new routes, broken links, metric change)，立即做路由廣告(immediate advertisement)；但對未穩定路由(unstable routes)則延遲做路由廣告，因而降低路由表的波動 (damping fluctuations)進而減少「相同序號編號」之「路由廣告的重播的數量」。
+
+路由選取： 1. 選取目的地的序號 (destination sequence number) higher的路由 (保證使用來自目的地的最新資訊) 2. 當序號一樣時，選取量度(Metric) [=至目的地的hop counts]lower的路由。
+---
+BSS: 由AP負責同一區所有傳輸
+IBSS: I是獨立，每個station之間彼此直接通訊、不需透過AP
+用IBSS交換資訊的雙方可能不在彼此的通訊範圍之內，需要其他station中繼(Relay)封包。封包的傳送需要多點跳躍(Multihop)才能送到目的地，因此如何尋找路由路徑(Routing path)，也就是路由探索(Route discovery)，把封包快速有效的傳往目的地很重要。
+---
+Route discovery 節點利用廣播(Broadcast) 路由請求(Route request, RREQ) 來獲得路由路徑。
+廣播的訊息需要一些中繼節點重播(Rebroadcast)，才能使所有節點得知。因為Node位置改變、可能多次重播、造成Broadcast storm問題。
