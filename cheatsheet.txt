@@ -49,3 +49,113 @@ DSR：
 Neighbor node週期性的傳"Hello Messages"，沒收到message可視為link failure。
 [AODV 的 destination seq. number 用途]
 1. 避免走舊的路 2. 避免loop產生
+--------------
+[Mobile IP 基本原理]
+移動主機（MH）根據收到的代理廣播消息來判斷自己是處在HN還是FN。當MH位于HN時，使用正常的IP協議通信；當它進入FN時，需要獲得一個轉交地址（CoA），然後向HA發送注冊（register）消息，通知其當前位置，即CoA。
+對端通信主機CH->MH的數據包通過正常的IP路由到達MH的HN，HA替MH截獲這些數據包，將它們進行隧道（tunneling）封裝，添加新的IP包頭，其目的地址爲CoA，源地址爲HA的地址，HA將新的IP包轉發到MH的當前位置，再由FA或MH恢復出原來的IP包；MH->CH的數據包則採用正常的IP路由。
+
+1. Mobile Host：在網際網路上，一台主機如果常常改變其對網路的接點(point of attachment)，稱為Mobile Host。接點的改變可能發生在網路正在通信中的狀態。但是通常假設接點的變化時間比通訊協定反應的時間來得慢。
+2. Home Network：對Mobile Host有管理權的網路，對網際網路上的其他主機而言，Mobile Host不論其目前的位址為何，"似乎"是接在此處。
+3. Home Address：和其他固定主機的位址一樣，此位址是固定的，由Home Network的管理者提供給Mobile Host。當傳送資料給Mobile Host時，只須知道此位址，不須知道Mobile Host目前的暫時位址。
+4. Home Agent ：在Home Network上的某一台主機，能夠使得Mobile Host對網路上的其他主機而言，是隨時都可以存取的。
+5. Foreign Network ：對任一Mobile Host而言，任一個除了Home Network之外，允許其接上的網路，就稱為Foreign Network。
+6. Care-of-Address：一個表示當Mobile Host不在Home Network時，在網路上接點的IP位址。
+7. Foreign Agent：在Foreign Network上的主機，能使封包傳送到Care-of-Address。
+8. Register：Mobile Host告知Home Agent其Care-of-Address。
+使用無線網路上網的時候，一定要使用接取設備所配發的 IP 位址〈IP Address〉而不能使用自己設定的固定IP位址或延用家裡無線網路設備所配發的 IP位址。使用者想要移動行動裝置、又不改變 IP 位址的設定，將只能在同一個 IP Subnet 的範圍內。移動行動裝置到不同的 IP Subnet 範圍內，就會發生網路無法連通的情況。因為 IP 位址的路由〈Routing〉方式是根據 IP Subnet 來判斷的，每一個路由器〈Router〉在收到封包後，會分析封包內的目的地位址來判斷要把封包送往那一個路由器，直到封包到達其 IP Subnet的Router 為止〈Hop-by-Hop Routing〉。當某行動裝置的 IP 位址和其目前所在 IP Subnet 不相同時，就會無法收到對方回覆的訊息。
+要解決這個問題，就是行動裝置不使用動態的 IP 位址，例如動態的 DHCP就不適合使用。因為 DHCP 的作法是每次新取得一個 IP 位址之後，必須重新建立連線。一旦漫遊到不同的子網路，就必需停止連線，等待取得新的位址之後，再重新建立連線。對於無線網路間漫遊是相當麻煩的一件事。
+因此而有了 Mobile IP 通訊協定的制定，可以使得行動裝置使用兩個 IP：「一個固定的位址，和一個暫時位址來連接到網際網路。在漫遊時利用暫時位址傳送，原先所作到一半的事情就不會被干擾而中斷。」以下將簡介 Mobile IP 的原理。
+Mobile IP 的元件：Mobile IP 主要組成包括移動節點〈Mobile Node；MN〉、本地仲介〈Home Agent；HA〉、外地仲介〈Foreign Agent；FA〉 三個元件及通信端〈Correspondent Node；CN〉，指在Internet 上與MN 通信的裝置。
+Mobile IP 以運作過程來說，可分三個階段：
+1. 仲介探索〈Agent Discovery〉：MN 尋找本地及外地仲介階段。（Advertisement, Solicitation）
+2. 註冊〈Registration〉：MN 向HA 及 FA 登記現有位置階段。
+3. 建立隧道〈Tunneling〉：HA 建立與外地之MN 間通道階段。
+
+在仲介探索階段後，MN 得到一個暫時 IP 位址，我們稱之為轉送位址〈Care-of Address；CoA〉，此位址可以從 FA 廣播取得〈稱為FA CoA, 可多人使用同 1 個 FA CoA〉或由 DHCP 或手動設定得到〈稱為Collocated CoA, 1人使用〉。在註冊階段時，MN 直接或透過FA 向HA 註冊其 CoA，此時HA 在記憶體中建立一個稱為移動連結表〈mobility binding table〉，其中記錄 MN 原始的 IP 與現在的 CoA 對應；若在註冊時透過 FA，則FA同時會在記憶體中建立一個來訪者表〈visitor list〉。
+因此，當在網際網路上有 CN 欲與 MN 通信時，資料傳送至 MN 原先所在之網路時立刻會被 HA 所攔截;
+若原先 MN 直接向 HA 註冊，則 HA 會建立起一 IP 隧道將之轉送至移動連結表所註冊之 MN CoA 處，FA 從該 IP 隧道解開封裝後再將資料傳給 MN；
+若原先 MN 透過 FA 向 HA 註冊，則 FA 就無需執行 IP 隧道解封裝的動作，只需如路由器般執行轉送動作即可。
+但若 MN 欲與 CN 通信，則 MN 可將資料直接送給 FA 再由 FA 將其直接繞至 CN 即可，不過通常此時 MN 是使用其原始 IP 位址作為傳送資料之來源位址，FA 或許會將該封包過濾，因此解決方法是使 FA 仍將該封包以反隧道封裝（reverse tunneling）之方式傳回 HA，再由 HA 解開封裝傳送至 CN，即可避免此問題。
+[另一種解釋]
+取得CoA (Discovering CoA)：
+一個MN取得CoA的方法：HA和FA每隔一段時間就會作”廣播”這個動作(broadcast)，發出有關於CoA的封包給LAN上的每個主機，如果LAN上有MN，就可以取得CoA。這麼做的原因在於，如果MN現在不是在HN時，只能收到廣播的封包。當然，如果MN現在是在HN時，HN可以不提供任何的CoA。當Router Advertisement再加上CoA時，這個訊息稱為"Agent Advertisement"。只靠廣播這個動作時，有時候MN會等不及，這時MN也可以主動的broadcast或者是multicast一個封包，來偵測現在是否有HA 或FA的存在。還有一個情形，就是MN已經隔一段時間都沒有收到任何的Agent Advertisement，就可以假設它現在已經不在這個FA的管轄範圍。這時，MN(或稱 Mobility agent, MA)也可以主動的隔一段時間，就送出一個封包(R 需要R註冊於FA，而不是用Co-CoA / B已經Busy註冊過FA/H/F...)(F=1的話, CoA欄位也一定要 = 1)。這個封包是使用Router Solicitation再加上一些資訊，例如MN需要這個CoA多久的時間，這整個訊息稱為"Agent Solicitation"。當Agent收到這個封包時，就必須馬上送出Agent Advertisement 的訊息出去。作完以上動作，這時MN就已經取得了CoA。但是HA還不知道這個MN目前的位址，所以還要有以下的步驟：
+註冊CoA (Registering CoA)：
+註冊的過程如下：MN向FA要求服務(這是上一步─Discovering所作的)，然後由FA向HA要求服務。因為在目前，MN雖然取得了一個CoA，但是還不能使用它，要等到HA同意後才可使用。HA會告訴FA它同意或是不同意，然後FA再把這個結果廣播給MN。註冊這個動作包括了三個重要的元素：Home address，CoA，以及Registration Lifetime，這三個元素又合稱為Binding。當註冊成功時，就產生了Binding。Binding是有期限的，超過了這個期限後就要重新註冊，稱為Binding Update。Binding Update這種動作會影響到HA的Routing Table，因此是很危險的，必須再註冊時作認證Authentication。Mobile IP規定了HA和MN都要有相同的一組”key”，相同才表示認證通過，為128-bit。但還是有可能被有心人士所猜出來，也就是replay attack。所以光一組key還不夠，另外還再註冊時加上identification field，在每次認證時，它的值都不相同。field產生的方法主要是使用時間作為註記，而HA和MN必須要能夠時間互相對應。
+接下來，就是如何真正的來傳送資料。
+Tunneling to the CoA：
+要怎麼把傳送到HN的封包，傳送到FN給MN？這裡使用了Encapsulate 這個技術。Encapsulate有兩種方法，一種是IP-within-IP，另一種是Minimal Encapsulation。由HA在收到封包後，在封包前加上一個新的標頭，但是原本的標頭維持不變，就可以用原本IP層傳送封包，而不須更動路徑上其他電腦的設定。FA在收到封包之後，再把新加上去的標頭刪除，傳送給MN。
+如果是MN想要傳送封包給網路上的主機時，則可以依照原本的IP擇路方式來傳。但是，如果是網路上的主機想要傳送封包給MN時，其資料傳送途徑則需經過HA與FA。由於此兩種傳送資料路徑的不相同，會造成傳送路徑是三角形(Triangular Routing of Data) 的情形。當MN改變其位置時，在MN向HA註冊前，由于HA不知道MH的最新的CoA，所以它仍然將屬于MH的IP包通過隧道發送到原先的外地網絡，導致這些IP包被丟棄，使得MH與CH間的通信受到影響，特別是切換頻繁、或者從MH到HA的距離很遠時。這種路徑雖然是有效的路徑，但是卻沒效率。一直到註冊成功後，產生了一個新的Binding，這時所有的封包才會依循新的路徑來傳送。
+
+[Movement Detection]
+Handoff的關鍵，「mobile device如何知道自己已經換cell了？」偵測出換了之後，MN就要和新的FA註冊CoA。
+1. Lazy Cell Switching，MH等BS傳agent ads.，除非等太久才會推測說已經換了，並用agent solicitation 註冊於新的cell。
+2. Prefix Matching，抓出目前新收到的 agent ads. 是不是同家人的。若prefix 不同的話，代表自己走到別人的家了。
+3. Eager Cell Switching，MH 同時從好幾個FAs 聽beacons，並存一個list放他的 FAs 和對應的 CoAs。較快速、但耗空間。
+
+-----------------
+IEEE 802.11
+1.具基礎架構的無線區域網路(Infrastructure Wireless Local Area Network)
+在該網路架構中，會有一至多個存取點(Access Point, AP)。存取點AP亦可稱為基地台(Base Station作為有線區域網路與無線區域網路的轉換與橋接地。
+2. 無基礎架構的無線區域網路(Ad-Hoc Wireless Local Area Network)
+[名詞]
+Mobile Host (MH):行動台。/Basic Service Area (BSA)/Basic Service Set (BSS)/Indep. Basic Service Set (IBSS): Ad-hoc network/Distribution System (DS):分散式系統/Access Point (AP)/Extended Service Area (ESA)/Extended Service Set (ESS)/Distribution System Services (DSS)
+MHS: 行動台服務(Mobile Host Service, 簡稱 MHS), 由行動台MH所提供。
+DSS: 分散式系統服務(Distribution System Services, 簡稱 DSS) ，由分散式系統所提供。
+[訊框的種類與類別]
+1.控制訊框(Control Frame)
+RTS, CTS, ACK, Contention-Free(CF)-End + ACK, CF-End, Power-save poll(PS-Poll)
+2.管理訊框(Management Frame)
+Beacon, Authentication, ATIM(Announcement Traffic Indication Message), Probe Request/Response
+3.資料訊框(Data Frame)
+[MS有兩種Mode]
+1. Active Mode (AM)
+The MS sends a "power-save poll (PS-Poll) frame" to the AP and goes active
+2. power-save mode (PS mode)
+Notify AP with “Power Management bit” in Frame Control field; in PS mode, MSs listen for beacons periodically
+[MAC 表頭訊框]
+Power Management (Pwr Mgt): 此旗標用來顯示行動台之電源管理模式。其值為 1 表示此行動台處於省電模式，其值為 0 表示此行動台處於正常模式。所有由 AP 傳送的訊框上此值都必須為 0。
+More Data: 此旗標由 AP 用來通知處於省電模式之 行動台說 AP 目前仍有MSDUs (MAC Service Data Units)欲傳送給該行動台。在 Data 訊框上其值為 1 表示至少還有一個 MSDU 待轉送。若為其他種類的訊框，則其值應為 0。
+[MAC 存取方式]
+1. DCF, 2. PCF。協調式功能(Coordination Function) 是指一個用來決定什麼時候AP能開始收送資料的機制。
+DCF 是基本存取方法，它利用載波感測多重存取及碰撞避免 (CSMA/CA)的技術，提供行動台收送「非同步」資料，這種方法可用在無基礎架構(Ad Hoc)和具基礎 建設(Infrastructure)。
+PCF 提供行動台收送具「時限性」的資料，屬於免競爭(Contention Free)方法，不會發生「訊框碰撞」，但只能用在具基礎架構的無線區域網路。
+[PCF/DCF交替進行]
+BSS中，有一個協調者(Point Coordinator)負責督導 這兩種服務的交替進行。也就是先進行一段時間的免競爭式傳輸，再跟著進行一段時間的競爭式傳輸。如此一個週期稱為一個超級訊框(Superframe)。在免競爭週期 (Contention Free Period, CFP) 內，訊框的傳送由 PCF 控制，而在競爭週期(Contention Period, CP) 內，訊框的傳送則由DCF所控制。
+[MSDU->MPDU]
+訊框之切割，是指將一個MSDU (MAC Service Data Unit)訊框切割成許多較小的MPDU((MAC Protocol Data Unit)訊框。切割由傳送者負責。
+[訓框分類，priority]
+將訊框分為四種不同的優先權等級，每種優先權等級的訊框在傳送之前都必需等待一段訊框間隔(Inter-Frame Space, IFS)，才可能獲得通道的使用權，進而減少與其他使用者碰撞的機會。
+1.SIFS (Short IFS):短訊框間隔;用來做立即的回應動作。其中要求傳送訊框(RTS)、允許傳送訊框(CTS)、回覆訊框(ACK) 等等，所有「等候時間」都是 SIFS等級。
+2.PIFS (PCF IFS):PCF訊框間隔;在進行 PCF免競爭式傳輸功能時，行動台傳送訊框前所必須等待的時間。
+3.DIFS (DCF IFS):DCF 訊框間隔;在進行 DCF 競爭式傳 輸功能時，行動台傳送訊框前所必須等待的時間。
+4.EIFS (Extended IFS):延長訊框間隔;行動台在進行「重送訊框」時所必須等待的時間。
+(SIFS < PIFS< DIFS < EIFS)
+[CSMA/CA Backoff後退演算法]
+在發現傳輸媒介由忙碌變成空閒時，先產生一段隨機延遲時間，然後才傳送訊 框。先產生隨機延遲時間的目的是想預先避免發生 碰撞，故此方法為碰撞避免(Contention Avoidence) 。
+[CSMA/CD]
+此方案要求裝置在傳送frame的同時要對信道進行偵聽，以確定是否發生碰撞，若在傳送資料過程中檢測到碰撞，則進行如下碰撞處理操作：傳送特殊阻塞資訊並立即停止傳送資料：特殊阻塞資訊是連續幾個位元組的全1訊號，此舉意在強化碰撞，以使得其它裝置能儘快檢測到碰撞發生。
+[VCS]
+實體層PHY在使用載波偵測技術時可能會導致「誤判」傳送媒介正在忙碌，802.11利用所謂的虛擬載波偵 測(Virtual Carrier Sense, VCS)知道傳送者目前正在傳送資料，其餘行動台就停止發送資料。
+VCS利用一個網路配置向量(Network Allocation Vector, 簡稱 NAV)，此向量記載其他AP還需要多久的時間來傳送訊框，而使AP根據這些資訊知道傳輸媒介現在是否忙碌、就表示這個AP現在不能傳送訊框，因為網路現在是忙碌的(其他AP傳送訊框的時間還沒結束)。此NAV就好像具備了載波偵測功能，告訴其他行動台傳輸媒介現在是否忙碌。
+[RTS/CTS]
+當其他行動台 看到接收端送回的 CTS 時，也會暫時停止傳送訊框 。亦即在 RTS 訊框和 CTS 訊框裡都包含了一記載 著傳送端將來要傳送訊框的持續時間(Duration)的欄位，而當別的行動台在看到傳送端送出的 RTS 訊框 ，或接收端送出的 CTS 訊框時，就會將裡面記載的 持續時間登錄到自己的網路配置向量NAV裡。
+[時間長度]
+3*tSIFS +tCTS +tFrag1 +tACK1，見圖。
+[競爭視窗CW]
+tBackoff = INT(CW*Random())*時槽時間，CWmin=7, CWmax=255。
+[免競爭週期中的 輪詢Polling]
+• CF-Poll: AP polls a station for UL transmission。行動台有無能力回覆由協調者所傳送的免競爭輪詢 (Contention Free Poll, CF-Poll)，所有AP都能接收在PCF控制下所傳送的所有訊框。
+• CF-ACK(DL): AP acknowledges a received UL frame
+• CF-ACK(UL): MS acknowledges a received DL frame
+[小結：802.11 MAC架構]
+免競爭服務（具時限傳送）->集中式協調（PCF）->分散式協調（DCF）。
+競爭式服務（非同步傳送）->分散式協調（DCF）。
+-------------
+[MAC]
+媒體存取層是指Media Access Control (MAC)，它提 供定址及媒體存取的控制方式，使得不同設備或網 路上的節點可以在多點的網路上通訊，而不會互相衝突。
+[固定式-單通道]
+1. 分頻多重存取 FDMA (Frequency Division Multiple Access) / 2. 分時多重存取 TDMA (Time Division Multiple Access, 在時間軸上 平等的劃分許多等長的訊框 (Frame)，而每個訊框再細分 為許多相等的時槽 (Timeslot)，每個時槽使用一個通道， 每一通道供一位使用者使用 / 3. 分碼多重存取 CDMA (Code Division Multiple Access) 除了切割時間之外，每一組傳輸都會 給予一組特定的編碼 (Code) ，要傳送的位元會先經過編 碼再傳送出去，如果彼此的編碼是正交 (Orthogonal) ，即 使使用相同的頻率也不會互相干擾。正交編碼:假設有四個編碼A、B、C、D ，編碼若彼此正 交，內積會等於0，因此不會互相產生干擾。而內積後獲 得+1表示送出的位元為1，獲得-1則送出的位元為0。
+[隨機式-單通道]
+1. Aloha 2. Slotted-Aloha 將時間軸分為許多時槽，當傳送端要傳送資料時，每次使用一個時槽 3.CSMA載波偵測多重存取機制, Carrier Sense是指傳送者必須先監聽目前傳輸媒介是否有人在使用，而Multiple Access則是指有多個節點共用這個傳輸媒介。在要傳輸之前會先偵測傳輸媒介，觀 察是否有其他節點正在傳輸資料，若無正在傳輸的資料 則直接傳送。
+[DSSS vs. FHSS] DSSS(XOR of the signal with pseudo-random number (chipping sequence))直接序列展頻是將原來窄頻的訊號 , 利用 "展頻碼(Spreading Code)" 將原始訊號展開成數倍頻寬的訊號 , 此展開的方法會將原來訊號的能量降低 , 甚至低於 "背景雜訊質(Background Noise)" , 這樣的機制讓有心擷取資料的人不易判斷出正確的訊號 , 也是軍方在通訊上採用這種技術的原因。跳頻展頻 (FHSS) 則是使用頻寬十分狹窄的 "窄波(Narrowband)" , 利用窄波於不同頻道間跳躍的方式傳遞訊號 , 這種傳遞方式必須建立於訊號交換的二方其窄波跳躍模式(Pattern) 一致 , 否則將無法溝通。(Fast Hopping:several frequencies per user bit/ SlowHopping: several user bits per frequency)
+[Cell Breathing] 小區呼吸（Cell breathing）是指如果一個行動電話同時被多個基站覆蓋，基站會根據自身的負載，調整基站的作用範圍的一種技術。當小區超負荷時，會縮小它的服務範圍，以減少用戶量。CDMA常用。
