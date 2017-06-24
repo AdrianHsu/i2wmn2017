@@ -137,6 +137,7 @@ INPUT i2wmn.aux
 OUTPUT i2wmn.aux
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3cmr.fd
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3cmr.fd
+INPUT img/diagram/1.png
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT img/handoffthreshold/dropout.jpg
@@ -145,6 +146,9 @@ INPUT img/handoffthreshold/pingpong.jpg
 INPUT img/mobility/dropout.jpg
 INPUT img/mobility/handoff.jpg
 INPUT img/mobility/pingpong.jpg
+INPUT img/small/dropout.png
+INPUT img/small/handoff.png
+INPUT img/small/pingpong.png
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmtt.fd
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmtt.fd
 INPUT i2wmn.aux

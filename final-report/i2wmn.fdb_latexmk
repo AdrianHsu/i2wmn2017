@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1498324438 "i2wmn.tex" "i2wmn.pdf" "i2wmn" 1498324440
+["pdflatex"] 1498326446 "i2wmn.tex" "i2wmn.pdf" "i2wmn" 1498326449
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmbi7t.tfm" 1136768653 2228 e564491c42a4540b5ebb710a75ff306c ""
@@ -56,15 +56,19 @@
   "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1463093894 31953 b9489e6e586f798610c60aec1f5ec548 ""
   "/usr/local/texlive/2016/texmf-var/web2c/xetex/xelatex.fmt" 1492870139 3520374 473ed07d4fa2c06354b82b1d3951f557 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "i2wmn.aux" 1498324440 1498 5c10bb63b699031b36fb1f1b15852c9e ""
-  "i2wmn.tex" 1498324435 8222 bc76ecdcfd0103e735f2fcd4fc22952b ""
+  "i2wmn.aux" 1498326449 2083 320a7f8cf2ba15d222430db9ab7e2c45 ""
+  "i2wmn.tex" 1498326442 9461 4aa727a1db08a877a405f5dcafd7910b ""
+  "img/diagram/1.png" 1498325833 42074 11d6387e29aa0786d3ad5275a7651ca1 ""
   "img/handoffthreshold/dropout.jpg" 1498317801 43084 ef07f57e4540c8696dc408e410243b0c ""
   "img/handoffthreshold/handoff.jpg" 1498317635 40751 23822cb941c11aa8f064a93062116cb6 ""
   "img/handoffthreshold/pingpong.jpg" 1498317547 41248 19d45ab375467cb7ea17ef3d96d3a1dc ""
   "img/mobility/dropout.jpg" 1498313290 35623 41f691bdd564cf074227a9443879b585 ""
   "img/mobility/handoff.jpg" 1498313527 37945 19e0ea1e19305a252fc7faf2e75db2d9 ""
   "img/mobility/pingpong.jpg" 1498313421 40633 7960c5b75a18e39f43979a4be59efddf ""
+  "img/small/dropout.png" 1498324967 17700 9d0ba23703613f936d07a8527f39f5a7 ""
+  "img/small/handoff.png" 1498324976 20998 8cfd9e67875ba8693043496fd286183a ""
+  "img/small/pingpong.png" 1498324950 17514 e95474b6da62187fcc966f9f99fcef33 ""
   (generated)
-  "i2wmn.pdf"
   "i2wmn.log"
+  "i2wmn.pdf"
   "i2wmn.aux"

@@ -22,7 +22,20 @@ Handover is the component that exchanges a continuous starting with one cell the
 
 
 \section{\textbf{INTRODUCTION}}
-One of the most handoff administration issues is introduced by the utilization of various path loss models. It manages the expansion of the Gaussian noise and hysteresis margin in the models to keep away from the ping-pong effect and which cell to hand over in cellular network.
+One of the most handoff administration issues is introduced by the utilization of various path loss models. It manages the expansion of the Gaussian noise and hysteresis margin in the models to keep away from the ping-pong effect and which cell to hand over in cellular network. Our main idea is that considering different factors in handoff criteria, and use different criteria to see the results of handoff and illustrate it with plots. we've also tried to gain some insight of these simulations.
+\begin{figure}[h]
+    \includegraphics[width=0.45\textwidth]{diagram/1}
+    \caption{Our handover machanism}
+\end{figure}
+If the threshold of drop become higher, the users drop timing will be bigger, and the sum of both will result in the number of handover events become fewer, which is what we expected. \\
+For the possible handoff criteria, the factors are listed below:
+\begin{enumerate}
+\item{signal}
+\item{SINR}
+\item{ $\delta$ in ping pong effect}
+\item{samples of observation(due to fading effect)}
+\end{enumerate}
+In short, We designed three criteria based on different factors and compare its performance.
 \section{\textbf{RELATED WORK}}
 The need to start handoff emerges when the signal of the serving base station decays underneath the threshold value. This handoff administration scheme embraces a hard handoff, which adaptively control the handoff time as indicated by the load status of cells. The displayed scheme supports better administration quality for various sort of systems utilizing different calculations. In a wireless mobile communication system, mobiles moving around the service area require communication services as a remote association. In this communication system, the coverage area is partitioned into littler locales (cells) to permit the reuse of the frequency spectrum to expand the total network capacity. The total network capacity with great quality ( and with minimum noise) is constantly attractive, frequencies utilized as a part of one cell group can be reused in different cells. Every cell is controlled by its own transmitter and receiver to serve the mobiles inside its range. The choice to start a handover relies on upon various control factors. The estimation of received signal strength must be found the averaged value of after some time to remove the quick flucthations due to the so-called multipath propagation. Averaging windows change in their shape and length, where the received signal is excessively feeble or is perilously close, making it impossible to winding up noticeably excessively weak, and then handover is required. Thus, we must ask the following questions:
 \begin{itemize}
@@ -32,7 +45,7 @@ The need to start handoff emerges when the signal of the serving base station de
 \item{How far into the coverage area of another cell does a user drift?}
 \item{What is the duration of service interruption during a handover?}
 \end{itemize}
-A threshold level may give a trigger to start a handover, keeping a client from bouncing forward and backward between two base stations is another important issue in handover calculation outline. Two methodologies are the hysteresis margin and dwell timer approaches[2]. The previous just enables a handover to a base station which is more grounded than the present one by no less than a settled or time varying hysteresis margin. The latter one limits the scaled minimum time between two handovers.
+A threshold level may give a trigger to start a handover, keeping a client from bouncing forward and backward between two base stations is another important issue in handover calculation outline.
 \pagebreak
 
 \section{\textbf{EXPERIMENTS}}
@@ -45,21 +58,19 @@ Handoff threshold is set to: when the average SINR below this value, began to pr
 \item{Handoff threshold is expected to increase handoff, ping-pong will rise
 (Handoff threshold infinite that mobile device will always try to connect to the SINR largest base station)}
 \end{enumerate}
-Initially set from the experiment only from the handoff threshold = 1e-10 to 1e-5 after rendering like a random distribution does not see any trend, then the experimental test to 1e-1 found threshold on the ping-pong and handoff impact There is a significant change from the beginning of the threshold = 0.001, which may mean that on the basis of this simulation setting, at the time of the order of the value = 0.001, it is the best way to distinguish between those who should not handoff This is worth the time to cause a large number of ping pong, below this value, the degree of identification is not enough, no matter what the difference is nothing.
+Initially we set the experiment only from the handoff threshold = $10^{-10}$ to $10^{-5}$ after rendering like a random distribution does not see any feature, and then from the experimental test to 1e-1 we found threshold on the ping-pong and handoff impact. There is a significant change from the beginning of the threshold = 0.001, which may mean that on the basis of this simulation setting, at the time of the order of the value = 0.001, it is the best way to distinguish between those who should not handoff This is worth the time to cause a large number of ping pong, below this value, the degree of identification is not enough, no matter what the difference is.
+
 \begin{figure}[h]
-    \centering
     \includegraphics[width=0.45\textwidth]{handoffthreshold/dropout}
     \caption{Handoff Threshold - Dropout}
     \label{fig:mesh1}
 \end{figure}
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{handoffthreshold/handoff}
+    \includegraphics[width=0.35\textwidth]{handoffthreshold/handoff}
     \caption{Handoff Threshold - Handoff}
     \label{fig:mesh2}
 \end{figure}
 \begin{figure}[h]
-    \centering
     \includegraphics[width=0.45\textwidth]{handoffthreshold/pingpong}
     \caption{Handoff Threshold - Pingpong}
     \label{fig:mesh3}
@@ -67,25 +78,40 @@ Initially set from the experiment only from the handoff threshold = 1e-10 to 1e-
 \subsection{Mobility}
 The three values ​​increase approximately as the mobility increases, which is consistent with the expected number of nodes because the total moving path is longer and the number of base stations passed.
 \begin{figure}[h]
-    \centering
     \includegraphics[width=0.45\textwidth]{mobility/dropout}
     \caption{Mobility - Dropout}
     \label{fig:mesh4}
 \end{figure}
 \begin{figure}[h]
-    \centering
     \includegraphics[width=0.45\textwidth]{mobility/handoff}
     \caption{Mobility - Handoff}
     \label{fig:mesh5}
 \end{figure}
 \begin{figure}[h]
-    \centering
     \includegraphics[width=0.45\textwidth]{mobility/pingpong}
     \caption{Mobility - Pingpong}
     \label{fig:mesh6}
 \end{figure}
+\subsection{Take A Closer Look}
+If we take those data described above into account, says, those three values ​​of which increase approximately as the mobility increases, which is consistent with the expected number of nodes because the total moving path is longer and the number of base stations passed. We can get the following results.
+\begin{figure}[h]
+    \includegraphics[width=0.45\textwidth]{small/dropout}
+    \caption{Mobility - Dropout}
+    \label{fig:mesh7}
+\end{figure}
+\begin{figure}[h]
+        \includegraphics[width=0.45\textwidth]{small/handoff}
+    \caption{Mobility - Handoff}
+    \label{fig:mesh8}
+\end{figure}
+\begin{figure}[h]
+    \includegraphics[width=0.45\textwidth]{small/pingpong}
+    \caption{Mobility - Pingpong}
+    \label{fig:mesh9}
+\end{figure}
 \section{\textbf{CONCLUSION}}
 A gathering of clients with a huge scope of versatility can access around in the general system creating substantial stream of traffic. At the point when the movement stack is concentrated in a cell, this cell turns into the so-called hotspot cell [1]. Thus, there is a need an appropriate activity driven handoff criteria; with the goal that clients will naturally move from congested cell to enable the system to adjust itself progressively.
+
 \section{\textbf{REFERENCES}}
 
 [1] Michel Goossens, Frank Mittelbach, and Alexander Samarin.
