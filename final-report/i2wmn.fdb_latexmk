@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1498326446 "i2wmn.tex" "i2wmn.pdf" "i2wmn" 1498326449
+["pdflatex"] 1498326845 "i2wmn.tex" "i2wmn.pdf" "i2wmn" 1498326847
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmbi7t.tfm" 1136768653 2228 e564491c42a4540b5ebb710a75ff306c ""
@@ -22,7 +22,6 @@
   "/usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1enc.def" 1284849341 1115 6f8850603672e58af2cd599bee6ade7d ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmr.fd" 1266195411 2284 11da099e92da4724f712149045c96354 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmss.fd" 1266195411 1546 f73305b0ca2520efb4953d14dfcb9cb7 ""
-  "/usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmtt.fd" 1266195411 2375 048018091c9aef586c688eaf2feff1a1 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty" 1454367976 105606 a38c5ce7d05796198d17f5a6bc55964a ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.cfg" 1454367976 530 838458c50df1b4d16b8dc5267ab31958 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.sty" 1454367976 1699 41a8dcd7126940efa254804d5311bbda ""
@@ -56,8 +55,8 @@
   "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1463093894 31953 b9489e6e586f798610c60aec1f5ec548 ""
   "/usr/local/texlive/2016/texmf-var/web2c/xetex/xelatex.fmt" 1492870139 3520374 473ed07d4fa2c06354b82b1d3951f557 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "i2wmn.aux" 1498326449 2083 320a7f8cf2ba15d222430db9ab7e2c45 ""
-  "i2wmn.tex" 1498326442 9461 4aa727a1db08a877a405f5dcafd7910b ""
+  "i2wmn.aux" 1498326847 2083 320a7f8cf2ba15d222430db9ab7e2c45 ""
+  "i2wmn.tex" 1498326844 9721 6d01364cd074e723de2c220395757a08 ""
   "img/diagram/1.png" 1498325833 42074 11d6387e29aa0786d3ad5275a7651ca1 ""
   "img/handoffthreshold/dropout.jpg" 1498317801 43084 ef07f57e4540c8696dc408e410243b0c ""
   "img/handoffthreshold/handoff.jpg" 1498317635 40751 23822cb941c11aa8f064a93062116cb6 ""
@@ -69,6 +68,6 @@
   "img/small/handoff.png" 1498324976 20998 8cfd9e67875ba8693043496fd286183a ""
   "img/small/pingpong.png" 1498324950 17514 e95474b6da62187fcc966f9f99fcef33 ""
   (generated)
-  "i2wmn.log"
   "i2wmn.pdf"
   "i2wmn.aux"
+  "i2wmn.log"

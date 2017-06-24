@@ -149,6 +149,4 @@ INPUT img/mobility/pingpong.jpg
 INPUT img/small/dropout.png
 INPUT img/small/handoff.png
 INPUT img/small/pingpong.png
-INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmtt.fd
-INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmtt.fd
 INPUT i2wmn.aux
