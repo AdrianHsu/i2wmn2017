@@ -1,10 +1,11 @@
 # Fdb version 3
-["pdflatex"] 1498320494 "i2wmn.tex" "i2wmn.pdf" "i2wmn" 1498320497
+["pdflatex"] 1498324438 "i2wmn.tex" "i2wmn.pdf" "i2wmn" 1498324440
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmbi7t.tfm" 1136768653 2228 e564491c42a4540b5ebb710a75ff306c ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm" 1136768653 2124 2601a75482e9426d33db523edf23570a ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm" 1136768653 2288 f478fc8fed18759effb59f3dad7f3084 ""
+  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty" 1463608860 8253 473e0e41f9adadb1977e8631b8f72ea6 ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty" 1463608860 18425 5b3c0c59d76fac78978b5558e83c1f36 ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/unicode-data/CaseFolding.txt" 1449876215 74499 11c335947e5ffa8ac69a3e530b8d2b40 ""
@@ -21,6 +22,7 @@
   "/usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1enc.def" 1284849341 1115 6f8850603672e58af2cd599bee6ade7d ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmr.fd" 1266195411 2284 11da099e92da4724f712149045c96354 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmss.fd" 1266195411 1546 f73305b0ca2520efb4953d14dfcb9cb7 ""
+  "/usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmtt.fd" 1266195411 2375 048018091c9aef586c688eaf2feff1a1 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty" 1454367976 105606 a38c5ce7d05796198d17f5a6bc55964a ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.cfg" 1454367976 530 838458c50df1b4d16b8dc5267ab31958 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.sty" 1454367976 1699 41a8dcd7126940efa254804d5311bbda ""
@@ -54,8 +56,14 @@
   "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1463093894 31953 b9489e6e586f798610c60aec1f5ec548 ""
   "/usr/local/texlive/2016/texmf-var/web2c/xetex/xelatex.fmt" 1492870139 3520374 473ed07d4fa2c06354b82b1d3951f557 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "i2wmn.aux" 1498320496 514 182544c14df27d8d5e5a3e6d32a6b389 ""
-  "i2wmn.tex" 1498320491 5424 f1811d578d6868bfe6cc5bd28921291f ""
+  "i2wmn.aux" 1498324440 1498 5c10bb63b699031b36fb1f1b15852c9e ""
+  "i2wmn.tex" 1498324435 8222 bc76ecdcfd0103e735f2fcd4fc22952b ""
+  "img/handoffthreshold/dropout.jpg" 1498317801 43084 ef07f57e4540c8696dc408e410243b0c ""
+  "img/handoffthreshold/handoff.jpg" 1498317635 40751 23822cb941c11aa8f064a93062116cb6 ""
+  "img/handoffthreshold/pingpong.jpg" 1498317547 41248 19d45ab375467cb7ea17ef3d96d3a1dc ""
+  "img/mobility/dropout.jpg" 1498313290 35623 41f691bdd564cf074227a9443879b585 ""
+  "img/mobility/handoff.jpg" 1498313527 37945 19e0ea1e19305a252fc7faf2e75db2d9 ""
+  "img/mobility/pingpong.jpg" 1498313421 40633 7960c5b75a18e39f43979a4be59efddf ""
   (generated)
   "i2wmn.pdf"
   "i2wmn.log"

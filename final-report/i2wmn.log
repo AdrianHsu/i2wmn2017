@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.22)  25 JUN 2017 00:08
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.22)  25 JUN 2017 01:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -983,12 +983,6 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 . - 'normal' (m/n) with NFSS spec.: <->"標楷體/OT:"
 . - 'small caps'  (m/sc) with NFSS spec.: 
 .................................................
-./i2wmn.tex:15: Too many }'s.
-l.15 }}
-       
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
 (/usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
 Package: xeCJK-listings 2016/05/14 v3.4.0 xeCJK patch file for listings
 \l__xeCJK_listings_max_char_int=\count160
@@ -1083,8 +1077,63 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 LaTeX Font Warning: Font shape `EU1/lmr/bx/sc' undefined
 (Font)              using `EU1/lmr/bx/n' instead on input line 19.
 
-[1
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1
+
+
+]
+File: img/handoffthreshold/dropout.jpg Graphic file (type QTm)
+ <use  "img/handoffthreshold/dropout.jpg" >
+File: img/handoffthreshold/handoff.jpg Graphic file (type QTm)
+ <use  "img/handoffthreshold/handoff.jpg" >
+File: img/handoffthreshold/pingpong.jpg Graphic file (type QTm)
+ <use  "img/handoffthreshold/pingpong.jpg" >
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+Missing character: There is no ​ in font [lmroman10-regular]:mapping=tex-text!
+Missing character: There is no ​ in font [lmroman10-regular]:mapping=tex-text!
+File: img/mobility/dropout.jpg Graphic file (type QTm)
+<use  "img/mobility/dropout.jpg" >
+File: img/mobility/handoff.jpg Graphic file (type QTm)
+ <use  "img/mobility/handoff.jpg" >
+File: img/mobility/pingpong.jpg Graphic file (type QTm)
+ <use  "img/mobility/pingpong.jpg" >
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 5431) in paragraph at lines 95--99
+[]\EU1/lmr/m/n/10 [2] Albert Einstein. \EU1/lmr/m/it/10 Zur Elektrodynamik bewegter
+ []
+
+*************************************************
+* xeCJK warning: "CJKfamily-Unknown"
+* 
+* Unknown CJK family `\CJKttdefault' is being ignored.
+* 
+* Try to use `\setCJKmonofont[...]{...}' to define it.
+*************************************************
+LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 102.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/euenc/eu1lmtt.fd
+File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Underfull \hbox (badness 10000) in paragraph at lines 101--103
+\EU1/lmtt/m/n/10 http:// www- cs- faculty.stanford.edu/ ˜uno/
+ []
+
+[2] [3
 
 ] (./i2wmn.aux)
 
@@ -1092,12 +1141,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 20587 strings out of 493591
- 400003 string characters out of 6143546
- 412937 words of memory out of 5000000
- 23863 multiletter control sequences out of 15000+600000
- 25070 words of font info for 99 fonts, out of 8000000 for 9000
+ 20675 strings out of 493591
+ 401947 string characters out of 6143546
+ 411985 words of memory out of 5000000
+ 23925 multiletter control sequences out of 15000+600000
+ 25532 words of font info for 102 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 38i,6n,72p,10381b,268s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,7n,72p,10381b,268s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on i2wmn.pdf (1 page).
+Output written on i2wmn.pdf (3 pages).
