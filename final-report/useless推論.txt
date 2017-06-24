@@ -1,0 +1,15 @@
+補充說明：
+1. mobile device 的移動方式為，固定的速度，但是每隔一段random的時間，就會 random 改變移動的方向
+2. 由於 simulation 過程中，mobile device 的移動具有隨機性，為減少單次實驗誤差，因此是使用同樣參數重複進行若干次實驗後，將數據平均而得
+-
+1. Mobility 的實驗
+	三個數值大致隨著 mobility 增加而增加，與預期一致，因為總移動路徑較長且經過的 base station 數量較多。
+
+2. Handoff Threshold 的實驗
+	handoff threshold 定為：當平均的 SINR 低於這個值的時候，開始準備 handoff 。 
+	2-1. dropout 隨著 handoff threshold 上升而下降，與預期一致，較早開始handoff 時間較為充裕，但是可能會有過早的問題，從實驗結果看起來確實也反映在ping pong effect上面。
+	
+	2-2. 預期 Handoff threshold 增加的時候 handoff 、 ping-pong 會上升
+	 (handoff threshold 無限大表示 mobile device 會 always 嘗試連上 SINR 最大的那個 base station)
+	最初從實驗設定只從 handoff threshold = 1e-10 ～ 1e-5 作圖之後呈現像是隨機分佈的樣子看不出什麼趨勢，後來將實驗測試到 1e-1 發現 threshold 對 ping-pong 和 handoff 的影響確實有發生，從 threshold = 0.001附近開始有較明顯變化，這可能表示平均而言在這樣的simulation 設定底下，在 threshold = 0.001 這個數量級的時候，是最能區分該不該 handoff 的標準，高過這個值得時候會讓ping pong 大量發生，低於這個值的時候，鑑別度不夠，不管選什麼都沒什麼差別。
+	
