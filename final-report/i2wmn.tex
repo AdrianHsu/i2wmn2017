@@ -116,10 +116,79 @@ As mentioned above, those simulation results reflect on the fact that when the t
     \caption{The handoff result when threshold value is too small.}
     \label{fig:mesh9}
 \end{figure}
-\subsection{Combining Droptime with }
+\subsection{Considering Droptime (Threshold to handover)}
+This experiment discusses the effect of threshold of drop on drop time, number of handover, and number of reconnection. So, we will talk about three results affected by threshold of drop respectively. Firstly, with threshold of drop increasing, drop time gradually increase. Especially if in the extreme case which threshold of drop is very high, the drop time will reach an almost maximum point during simulation time. Secondly, as threshold of drop increasing or decreasing, number of handover will accordingly decrease or increasing. So, it should have some trend between this relation. As we can see from the plot, with threshold of drop increasing, number of handover gradually decrease. The reason why this kind of event happened is due to the fact that the drop time for each user is low.
+Thirdly, not like above two results. As threshold of drop increasing or decreasing, number of handover will not accordingly decrease or increasing. So, it shouldn’t have some trend between this relation.
+
+\begin{figure}[h]
+    \includegraphics[width=0.45\textwidth]{exp1/1}
+    \caption{Threshold to handover: drop threshold is $10^{-8}$}
+    \label{fig:mesh12}
+\end{figure}
+\begin{figure}[h]
+    \includegraphics[width=0.30\textwidth]{exp1/2}
+    \caption{Threshold to handover: drop threshold is $0.25$}
+    \label{fig:mesh13}
+\end{figure}
+
+\pagebreak
+
+
+
+\begin{figure}[h]
+    \includegraphics[width=0.45\textwidth]{exp1/3}
+    \caption{Threshold to handover: drop threshold is $0.5$}
+    \label{fig:mesh14}
+\end{figure}
+\begin{figure}[h]
+    \includegraphics[width=0.45\textwidth]{exp1/4}
+    \caption{Threshold to handover: drop threshold is $0.75$}
+    \label{fig:mesh15}
+\end{figure}
+\begin{figure}[h]
+    \includegraphics[width=0.3\textwidth]{exp1/5}
+    \caption{Threshold to handover: drop threshold is $10$}
+    \label{fig:mesh16}
+\end{figure}
+Thus, we will only discuss extreme cases and try to explain it .If in the extreme case which threshold of drop is very low, number of reconnection is almost zero for each user. It’s intuitively to understand, because drop time is almost zero for each user. So, each user doesn’t have any chance to lose its connection to its belonging base station. And, if in the extreme case which threshold of drop is very high, as we can see from the last plot, number of reconnection is very close to zero for each user. But, number of reconnection for each user still have a nonzero value. The condition of nonzero is when user is very close to the base station. The probability of event that user is very close to base station is low, so the number of reconnection is low accordingly.
+\subsection{Considering Droptime (Mobility to handover)}
+It is important to establish a traffic model before analyzing the performance of any mobile cellular radio system. Several traffic models have been proposed by many authors based on different assumptions on user’s distribution in the cell and their mobility. In the end we discuss about the relationship between mobility to handover, the distribution and the ratio of droptime.As we can see form the plots below, the more mobile the user is , the more drop time is , the more number of handover is,  the more number of reconnection is.So, from the experiments’ results, we can conclude that when user is at a high mobility condition, more issues such as drop time, handover, and reconnection should be taken care of. This situation equals to the situation that when base station’s radius get smaller which is exactly the 5G scenario. In 5G, due to adoption of mmWave, the base station will deployed more densely. So, the results done by this experiment will be more realistic in the future communication community.
+
+\begin{figure}[h]
+    \includegraphics[width=0.45\textwidth]{exp2/1}
+    \caption{Mobility to handover, 1st}
+    \label{fig:mesh16}
+\end{figure}
+
+\pagebreak
+
+\begin{figure}[h]
+    \includegraphics[width=0.346\textwidth]{exp2/2}
+    \caption{Mobility to handover, 2nd}
+    \label{fig:mesh16}
+\end{figure}
+\begin{figure}[h]
+    \includegraphics[width=0.346\textwidth]{exp2/3}
+    \caption{Mobility to handover, 3rd}
+    \label{fig:mesh16}
+\end{figure}
+\begin{figure}[h]
+    \includegraphics[width=0.45\textwidth]{exp2/4}
+    \caption{Mobility to handover, 4th}
+    \label{fig:mesh16}
+\end{figure}
+The reason why number of reconnection is nonzero value when threshold of drop is extremely high is because user have little chance that it’s very close to base station. The results done by this experiment will be more realistic in the future communication community, just as what we've expected!
 
 \section{\textbf{CONCLUSION}}
-A gathering of clients with a huge scope of versatility can access around in the general system creating substantial stream of traffic. At the point when the movement stack is concentrated in a cell, this cell turns into the so-called hotspot cell [1]. Thus, there is a need an appropriate activity driven handoff criteria; with the goal that clients will naturally move from congested cell to enable the system to adjust itself progressively.
+A gathering of clients with a huge scope of versatility can access around in the general system creating substantial stream of traffic. Thus, there is a need an appropriate activity driven handoff criteria; with the goal that clients will naturally move from congested cell to enable the system to adjust itself progressively. In the project we got the following sumulation results.
+\subsection{Summary}
+\begin{itemize}
+\item{Drop time and number of handover has trend between threshold of drop}
+\item{Number of reconnection doesn’t has trend between threshold of drop}
+\item{Number of handover is strongly related to drop time}
+\end{itemize}
+In brief, The necessity of efficient management of handoff calls for uninterrupted service in cellular mobile communication is discussed in this project.
+
 
 \section{\textbf{REFERENCES}}
 
