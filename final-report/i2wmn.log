@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.22)  25 JUN 2017 01:54
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.22)  25 JUN 2017 16:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -987,7 +987,11 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 Package: xeCJK-listings 2016/05/14 v3.4.0 xeCJK patch file for listings
 \l__xeCJK_listings_max_char_int=\count160
 \l__xeCJK_listings_flag_int=\count161
-) (./i2wmn.aux)
+) (./i2wmn.aux
+
+LaTeX Warning: Label `fig:mesh9' multiply defined.
+
+)
 \openout1 = `i2wmn.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
@@ -1106,16 +1110,25 @@ File: img/small/dropout.png Graphic file (type QTm)
 File: img/small/handoff.png Graphic file (type QTm)
  <use  "img/small/handoff.png" >
 File: img/small/pingpong.png Graphic file (type QTm)
- <use  "img/small/pingpong.png" > [2] [3] (./i2wmn.aux)
+ <use  "img/small/pingpong.png" >
+File: img/diagram/small-threshold.jpg Graphic file (type QTm)
+ <use  "img/diagram/small-threshold.jpg" > [2]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[3] (./i2wmn.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 20637 strings out of 493591
- 400664 string characters out of 6143546
- 412010 words of memory out of 5000000
- 23885 multiletter control sequences out of 15000+600000
+ 20639 strings out of 493591
+ 400714 string characters out of 6143546
+ 412049 words of memory out of 5000000
+ 23886 multiletter control sequences out of 15000+600000
  25524 words of font info for 101 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
  38i,7n,72p,10381b,268s stack positions out of 5000i,500n,10000p,200000b,80000s

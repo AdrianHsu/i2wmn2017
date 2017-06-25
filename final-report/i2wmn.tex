@@ -49,16 +49,17 @@ A threshold level may give a trigger to start a handover, keeping a client from 
 \pagebreak
 
 \section{\textbf{EXPERIMENTS}}
-
-The mobile device moves in a fixed speed, but every random period of time, it will random to change the direction of movement. As the simulation process, mobile device movement is random, in order to reduce the single experimental error, so the same parameters are repeated using a number of experiments, the data obtained from the average.
+The mobile devices moves in a fixed speed, every random period of time, they will randomly change the direction of movement. Since in the simulation process, mobile devices movements are random, in order to reduce the single experimental error, our experiments are repeated using a same set of parameters, so that the noise could be averaged.
 \subsection{Handoff Threshold}
-Handoff threshold is set to: when the average SINR below this value, began to prepare handoff.
+Handoff threshold is the value that when the average SINR is below
+this value, the handoff process is triggered.
 \begin{enumerate}
-\item{Dropout decreases as the handoff threshold rises and is expected to be the same, and the earlier handoff time is more abundant, but there may be too early problems, and the results are actually reflected in the ping pong effect, just like what we've expected.}
-\item{Handoff threshold is expected to increase handoff, ping-pong will rise
-(Handoff threshold infinite that mobile device will always try to connect to the SINR largest base station)}
+\item{Dropout decreases as the handoff threshold rises, since the earlier the handoff process starts, the more sufficient the time it has to finish the process. And the ping-pong effect can be observed increasing while the threshold rises.}
+\item{Handoff threshold is expected to increase handoff and
+ping-pong (infinite Handoff threshold means that
+mobile device will always try to connect to the largest SINR base station)}
 \end{enumerate}
-Initially we set the experiment only from the handoff threshold = $10^{-10}$ to $10^{-5}$ after rendering like a random distribution does not see any feature, and then from the experimental test to 1e-1 we found threshold on the ping-pong and handoff impact. There is a significant change from the beginning of the threshold = 0.001, which may mean that on the basis of this simulation setting, at the time of the order of the value = 0.001, it is the best way to distinguish between those who should not handoff This is worth the time to cause a large number of ping pong, below this value, the degree of identification is not enough, no matter what the difference is.
+Initially we set the experiment only with the handoff threshold = $10^{−10}$ to $10^{−5}$. And the result seems like a random distribution, and then we redo the experiments and test to $10^{−1}$ we found threshold on the ping-pong and handoff actually happens. There is a significant change from the beginning of the threshold = $0.001$, which may indicates that on the basis of this simulation setting, at the SINR order of the value = $0.001$, it is a better value to distinguish between those who should handoff. Above this value, a large number of ping enough, no matter what the SINR difference is.
 
 \begin{figure}[h]
     \includegraphics[width=0.45\textwidth]{handoffthreshold/dropout}
@@ -109,6 +110,14 @@ If we take those data described above into account, says, those three values ​
     \caption{Mobility - Pingpong}
     \label{fig:mesh9}
 \end{figure}
+As mentioned above, those simulation results reflect on the fact that when the threshold value is relatively small, the data will fluctuate in a minuscale.
+\begin{figure}[h]
+    \includegraphics[width=0.45\textwidth]{diagram/small-threshold}
+    \caption{The handoff result when threshold value is too small.}
+    \label{fig:mesh9}
+\end{figure}
+\subsection{Combining Droptime with }
+
 \section{\textbf{CONCLUSION}}
 A gathering of clients with a huge scope of versatility can access around in the general system creating substantial stream of traffic. At the point when the movement stack is concentrated in a cell, this cell turns into the so-called hotspot cell [1]. Thus, there is a need an appropriate activity driven handoff criteria; with the goal that clients will naturally move from congested cell to enable the system to adjust itself progressively.
 
